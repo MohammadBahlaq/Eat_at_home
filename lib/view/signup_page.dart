@@ -70,7 +70,7 @@ class Signup extends StatelessWidget {
                 ),
                 CustomTextFeild(
                   controller: txtPhone,
-                  labelText: "Mobil number",
+                  labelText: "Mobile number",
                   icon: Icons.phone,
                   keyboardType: TextInputType.phone,
                   validator: (txt) {
