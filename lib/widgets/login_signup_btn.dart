@@ -9,7 +9,7 @@ class CustomButton extends StatelessWidget {
     this.borderRadius = 15,
   }) : super(key: key);
 
-  final String text;
+  final Widget text;
   final void Function() onClick;
   final double padding;
   final double borderRadius;
@@ -26,8 +26,9 @@ class CustomButton extends StatelessWidget {
           ),
         ),
         onPressed: onClick,
-        child: Text(text, style: const TextStyle(fontSize: 18)),
+        child: text,
       ),
     );
   }
 }
+//

@@ -25,10 +25,15 @@ class Login extends StatelessWidget {
         title: const Text("Login"),
       ),
       body: ListView(
+        padding: const EdgeInsets.only(top: 20),
         children: [
-          Image.asset(
-            "images/logo.png",
-            height: MediaQuery.of(context).size.height * 0.3,
+          CircleAvatar(
+            backgroundColor: Colors.blue,
+            radius: 125,
+            child: Image.asset(
+              "images/logo.png",
+              //height: MediaQuery.of(context).size.height * 0.3,
+            ),
           ),
           Form(
             key: formKey,
@@ -56,7 +61,7 @@ class Login extends StatelessWidget {
             ),
           ),
           CustomButton(
-            text: "Login",
+            text: const Text("Login", style: TextStyle(fontSize: 18)),
             onClick: () async {
               if (formKey.currentState!.validate()) {
                 int msg = await context.read<UserController>().login(

@@ -22,10 +22,15 @@ class Signup extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text("Shignup")),
       body: ListView(
+        padding: const EdgeInsets.only(top: 20),
         children: [
-          Image.asset(
-            "images/logo.png",
-            height: MediaQuery.of(context).size.height * 0.3,
+          CircleAvatar(
+            backgroundColor: Colors.blue,
+            radius: 125,
+            child: Image.asset(
+              "images/logo.png",
+              //height: MediaQuery.of(context).size.height * 0.3,
+            ),
           ),
           Form(
             key: formKey,
@@ -78,7 +83,7 @@ class Signup extends StatelessWidget {
             ),
           ),
           CustomButton(
-            text: "Signup",
+            text: const Text("Signup", style: TextStyle(fontSize: 18)),
             onClick: () async {
               if (formKey.currentState!.validate()) {
                 int msg = await context.read<UserController>().signupUser(

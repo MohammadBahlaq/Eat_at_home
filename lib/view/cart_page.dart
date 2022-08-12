@@ -50,8 +50,15 @@ class Cart extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(bottom: 8),
             child: CustomButton(
-              text:
-                  "Confirm your order (${context.read<CartController>().totalPrice.toStringAsFixed(2)} JD)",
+              text: Selector<CartController, double>(
+                selector: (context, p1) => p1.totalPrice,
+                builder: (context, totalPrice, child) {
+                  return Text(
+                    "Confirm your order (${totalPrice.toStringAsFixed(2)} JD)",
+                    style: const TextStyle(fontSize: 18),
+                  );
+                },
+              ),
               onClick: () {},
               padding: 0,
               borderRadius: 0,
