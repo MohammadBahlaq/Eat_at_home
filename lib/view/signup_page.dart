@@ -86,6 +86,23 @@ class Signup extends StatelessWidget {
             text: const Text("Signup", style: TextStyle(fontSize: 18)),
             onClick: () async {
               if (formKey.currentState!.validate()) {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      content: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Text("Loading...",
+                              style: TextStyle(fontSize: 18)),
+                          SizedBox(
+                              height: MediaQuery.of(context).size.height / 25),
+                          const CircularProgressIndicator(),
+                        ],
+                      ),
+                    );
+                  },
+                );
                 int msg = await context.read<UserController>().signupUser(
                       txtEmail.text,
                       txtPassword.text,
@@ -93,6 +110,7 @@ class Signup extends StatelessWidget {
                       txtPhone.text,
                     );
                 if (msg == 0) {
+                  Navigator.of(context).pop();
                   showDialog(
                     context: context,
                     builder: (context) {

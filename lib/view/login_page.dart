@@ -64,6 +64,23 @@ class Login extends StatelessWidget {
             text: const Text("Login", style: TextStyle(fontSize: 18)),
             onClick: () async {
               if (formKey.currentState!.validate()) {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      content: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Text("Loading...",
+                              style: TextStyle(fontSize: 18)),
+                          SizedBox(
+                              height: MediaQuery.of(context).size.height / 25),
+                          const CircularProgressIndicator(),
+                        ],
+                      ),
+                    );
+                  },
+                );
                 int msg = await context.read<UserController>().login(
                       txtEmail.text,
                       txtPassword.text,
@@ -71,6 +88,7 @@ class Login extends StatelessWidget {
 
                 if (msg == 1) {
                   context.read<UserController>().setLogin = true;
+
                   await context
                       .read<CartController>()
                       .getCart(context.read<UserController>().userInfo!.id);
@@ -78,7 +96,9 @@ class Login extends StatelessWidget {
                       "Total Price: ${context.read<CartController>().totalPrice}");
                   Navigator.of(context)
                       .pushNamedAndRemoveUntil("home", (route) => false);
+                  //Navigator.of(context).pop();
                 } else {
+                  Navigator.of(context).pop();
                   showDialog(
                     context: context,
                     builder: ((context) => CustomDialog(

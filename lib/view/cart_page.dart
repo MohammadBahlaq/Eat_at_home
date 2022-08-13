@@ -20,31 +20,34 @@ class Cart extends StatelessWidget {
           Selector<CartController, int>(
             selector: (context, p1) => p1.cart.length,
             builder: (context, cartlength, child) {
-              return ListView.builder(
-                padding: const EdgeInsets.only(bottom: 45),
-                itemCount: cartlength,
-                itemBuilder: (BuildContext context, i) {
-                  return CartCard(
-                    image:
-                        "${Data.imgPath}${context.read<CartController>().cart[i].img}",
-                    category: context.read<CartController>().cart[i].category,
-                    name: context.read<CartController>().cart[i].name,
-                    index: i,
-                    onClick: () {
-                      context.read<CartController>().deleteFormCart(
-                          context.read<CartController>().cart[i]);
-                    },
-                    onIncrement: () {
-                      context.read<CartController>().incrementCount(
-                          context.read<CartController>().cart[i]);
-                    },
-                    onDecrement: () {
-                      context.read<CartController>().decrementCount(
-                          context.read<CartController>().cart[i]);
-                    },
-                  );
-                },
-              );
+              return cartlength == 0
+                  ? const Center(child: CircularProgressIndicator())
+                  : ListView.builder(
+                      padding: const EdgeInsets.only(bottom: 45),
+                      itemCount: cartlength,
+                      itemBuilder: (BuildContext context, i) {
+                        return CartCard(
+                          image:
+                              "${Data.imgPath}${context.read<CartController>().cart[i].img}",
+                          category:
+                              context.read<CartController>().cart[i].category,
+                          name: context.read<CartController>().cart[i].name,
+                          index: i,
+                          onClick: () {
+                            context.read<CartController>().deleteFormCart(
+                                context.read<CartController>().cart[i]);
+                          },
+                          onIncrement: () {
+                            context.read<CartController>().incrementCount(
+                                context.read<CartController>().cart[i]);
+                          },
+                          onDecrement: () {
+                            context.read<CartController>().decrementCount(
+                                context.read<CartController>().cart[i]);
+                          },
+                        );
+                      },
+                    );
             },
           ),
           Padding(
