@@ -20,7 +20,7 @@ class Signup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text("Shignup")),
+      appBar: AppBar(title: const Text("Signup")),
       body: ListView(
         padding: const EdgeInsets.only(top: 20),
         children: [

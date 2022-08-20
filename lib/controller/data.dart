@@ -1,10 +1,8 @@
 // ignore_for_file: avoid_print
 
-import 'package:flutter/cupertino.dart';
-
-class Data with ChangeNotifier {
+class Data {
   static String apiPath =
-      "https://mohammadbahlaq.000webhostapp.com/api/"; //http://10.0.2.2/EatAtHome/api/
+      "http://10.0.2.2/EatAtHome/api/"; //https://mohammadbahlaq.000webhostapp.com/api/
   static String imgPath =
-      "https://mohammadbahlaq.000webhostapp.com/images/"; //http://10.0.2.2/EatAtHome/images/
+      "http://10.0.2.2/EatAtHome/images/"; //https://mohammadbahlaq.000webhostapp.com/images/
 }
