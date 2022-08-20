@@ -1,5 +1,5 @@
 # Eat at home
-This is The second project in #Flutter but with #Provider state management
+This is The second project in #Flutter but with #Provider state management and #MVC design pattern
 ![1](https://user-images.githubusercontent.com/106377304/185743862-ce114ce8-3e7b-4885-b978-5260fe69f3f0.png)
 Login page
 ![2](https://user-images.githubusercontent.com/106377304/185743885-0fe01a0e-36f0-48d5-b64f-878a00ea4ce9.png)
