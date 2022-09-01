@@ -1,8 +1,8 @@
 // ignore_for_file: avoid_print
 
-import 'package:e_commerce/controller/data.dart';
-import 'package:e_commerce/widgets/cart_card.dart';
-import 'package:e_commerce/widgets/login_signup_btn.dart';
+import 'package:eat_at_home/controller/data.dart';
+import 'package:eat_at_home/widgets/cart_card.dart';
+import 'package:eat_at_home/widgets/login_signup_btn.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../controller/cart_controller.dart';

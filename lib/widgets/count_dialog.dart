@@ -1,5 +1,5 @@
-import 'package:e_commerce/controller/cart_controller.dart';
-import 'package:e_commerce/widgets/inc_dec_buttons.dart';
+import 'package:eat_at_home/controller/cart_controller.dart';
+import 'package:eat_at_home/widgets/inc_dec_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

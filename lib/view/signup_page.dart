@@ -1,8 +1,9 @@
 // ignore_for_file: avoid_print, use_build_context_synchronously
 //Test three
-import 'package:e_commerce/widgets/custom_dialog.dart';
-import 'package:e_commerce/widgets/custom_textfield.dart';
-import 'package:e_commerce/widgets/login_signup_btn.dart';
+
+import 'package:eat_at_home/widgets/custom_dialog.dart';
+import 'package:eat_at_home/widgets/custom_textfield.dart';
+import 'package:eat_at_home/widgets/login_signup_btn.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:string_validator/string_validator.dart';

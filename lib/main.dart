@@ -1,10 +1,9 @@
-import 'package:e_commerce/controller/cart_controller.dart';
-import 'package:e_commerce/controller/data.dart';
-import 'package:e_commerce/controller/user_controller.dart';
-import 'package:e_commerce/view/cart_page.dart';
-import 'package:e_commerce/view/home_page.dart';
-import 'package:e_commerce/view/login_page.dart';
-import 'package:e_commerce/view/signup_page.dart';
+import 'package:eat_at_home/controller/cart_controller.dart';
+import 'package:eat_at_home/controller/user_controller.dart';
+import 'package:eat_at_home/view/cart_page.dart';
+import 'package:eat_at_home/view/home_page.dart';
+import 'package:eat_at_home/view/login_page.dart';
+import 'package:eat_at_home/view/signup_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

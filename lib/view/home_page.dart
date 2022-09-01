@@ -1,4 +1,4 @@
-import 'package:e_commerce/widgets/custom_dialog.dart';
+import 'package:eat_at_home/widgets/custom_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../controller/cart_controller.dart';
