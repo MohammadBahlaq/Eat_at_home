@@ -3,6 +3,7 @@
 import 'package:eat_at_home/controller/data.dart';
 import 'package:eat_at_home/model/bill.dart';
 import 'package:eat_at_home/widgets/cart_card.dart';
+import 'package:eat_at_home/widgets/custom_dialog.dart';
 import 'package:eat_at_home/widgets/login_signup_btn.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -62,19 +63,81 @@ class Cart extends StatelessWidget {
                   );
                 },
               ),
-              onClick: () {
+              onClick: () async {
                 DateTime date = DateTime.now(); //DateTime(2022, 12, 25, 3, 5)
+
                 //print("${date.day}/${date.month}/${date.year}");
                 //print("${date.hour.toString().padLeft(2, "0")}:${date.minute.toString().padLeft(2, "0")}");
-                cartController.confirm(
-                  Bill(
-                    date: "${date.day}/${date.month}/${date.year}",
-                    time:
-                        "${date.hour.toString().padLeft(2, "0")}:${date.minute.toString().padLeft(2, "0")}",
-                    status: 1,
-                    totalprice: cartController.totalPrice,
-                  ),
-                );
+
+                // await cartController.confirm(
+                //           Bill(
+                //             date: "${date.day}/${date.month}/${date.year}",
+                //             time:
+                //                 "${date.hour.toString().padLeft(2, "0")}:${date.minute.toString().padLeft(2, "0")}",
+                //             status: 1,
+                //             totalprice: cartController.totalPrice,
+                //           ),
+                //           cartController.cart,
+                //         )
+
+                0 == 1
+                    ? showDialog(
+                        context: context,
+                        builder: (context) {
+                          return CustomDialog(
+                            title: "Done",
+                            msg:
+                                "Your order confirmed click OK to tracing your order",
+                            onClick: () {
+                              Navigator.of(context).pop();
+                            },
+                          );
+                        },
+                      )
+                    // ? ScaffoldMessenger.of(context).showSnackBar(
+                    //     SnackBar(
+                    //       duration: const Duration(seconds: 3),
+                    //       backgroundColor: Colors.blueAccent,
+                    //       content: Row(
+                    //         children: [
+                    //           const Icon(
+                    //             Icons.done,
+                    //             size: 25,
+                    //             color: Colors.white,
+                    //           ),
+                    //           SizedBox(
+                    //               width:
+                    //                   MediaQuery.of(context).size.width / 20),
+                    //           const Text(
+                    //             "Your order confirmed",
+                    //             style: TextStyle(fontSize: 16),
+                    //           ),
+                    //         ],
+                    //       ),
+                    //     ),
+                    //   )
+                    : ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          duration: const Duration(seconds: 3),
+                          backgroundColor: Colors.blueAccent,
+                          content: Row(
+                            children: [
+                              const Icon(
+                                Icons.error,
+                                size: 25,
+                                color: Colors.white,
+                              ),
+                              SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width / 20),
+                              const Text(
+                                "There is an error please try later",
+                                style: TextStyle(fontSize: 16),
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
               },
               padding: 0,
               borderRadius: 0,

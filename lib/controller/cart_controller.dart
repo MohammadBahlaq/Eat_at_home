@@ -25,8 +25,7 @@ class CartController with ChangeNotifier {
       },
     );
     print(jsonDecode(response.body));
-
-    //////////////////////////////////////
+    ////////////////////////////////////
     count = 1;
     notifyListeners();
   }
@@ -71,7 +70,7 @@ class CartController with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> confirm(Bill bill) async {
+  Future<int> confirm(Bill bill, List<CartP> products) async {
     String url = "${Data.apiPath}create_bill.php";
     var response = await http.post(Uri.parse(url), body: {
       "date": bill.date,
@@ -79,9 +78,26 @@ class CartController with ChangeNotifier {
       "status": "${bill.status}",
       "totalprice": "${bill.totalprice}",
     });
-    //print(int.parse(response.body));
-    //return int.parse(response.body);
-    
+
+    int billID = int.parse(response.body);
+    print("Bill id: $billID");
+
+    for (CartP product in products) {
+      url = "${Data.apiPath}confirme.php";
+      response = await http.post(
+        Uri.parse(url),
+        body: {
+          "userid": "${product.userId}",
+          "mealid": "${product.mealId}",
+          "count": "${product.count}",
+          "subprice": "${product.subTotalPrice}",
+          "billid": "$billID"
+        },
+      );
+      print("Meal id: ${product.mealId}");
+    }
+    print(int.parse(response.body));
+    return int.parse(response.body);
   }
 
   void calculateTotalPrice() {
