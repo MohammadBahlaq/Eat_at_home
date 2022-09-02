@@ -21,6 +21,7 @@ class CountDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final mq = MediaQuery.of(context);
     return AlertDialog(
       title: const Text("Count"),
       content: Column(
@@ -50,13 +51,13 @@ class CountDialog extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: MediaQuery.of(context).size.height / 36),
+          SizedBox(height: mq.size.height / 36),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               primary: Colors.black,
               fixedSize: Size(
-                MediaQuery.of(context).size.width / 2,
-                MediaQuery.of(context).size.height / 15,
+                mq.size.width / 2,
+                mq.size.height / 15,
               ),
             ),
             onPressed: onConfirm,

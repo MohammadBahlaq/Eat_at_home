@@ -10,6 +10,8 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final CartController cartController = context.read<CartController>();
+    final UserController userController = context.read<UserController>();
     return DefaultTabController(
       length: 5,
       child: Scaffold(
@@ -25,8 +27,8 @@ class Home extends StatelessWidget {
                         builder: (context) {
                           return CustomDialog(
                               onClick: () {
-                                context.read<UserController>().setLogin = false;
-                                context.read<CartController>().logoutCart();
+                                userController.setLogin = false;
+                                cartController.logoutCart();
                                 Navigator.of(context).pop();
                               },
                               title: "Logout",
@@ -48,9 +50,9 @@ class Home extends StatelessWidget {
                   icon: const Icon(Icons.shopping_cart),
                   onPressed: () {
                     if (context.read<UserController>().isLogin) {
-                      context.read<CartController>().getCart(
-                            context.read<UserController>().userInfo!.id,
-                          );
+                      cartController.getCart(
+                        userController.userInfo!.id,
+                      );
                       Navigator.pushNamed(context, "cart");
                     } else {
                       Navigator.pushNamed(context, "login");

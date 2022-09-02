@@ -1,9 +1,9 @@
 // ignore_for_file: avoid_print
 
 import 'dart:convert';
-
 import 'package:eat_at_home/controller/data.dart';
 import 'package:eat_at_home/model/Cart.dart';
+import 'package:eat_at_home/model/bill.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
@@ -69,6 +69,19 @@ class CartController with ChangeNotifier {
     }
     calculateTotalPrice();
     notifyListeners();
+  }
+
+  Future<void> confirm(Bill bill) async {
+    String url = "${Data.apiPath}create_bill.php";
+    var response = await http.post(Uri.parse(url), body: {
+      "date": bill.date,
+      "time": bill.time,
+      "status": "${bill.status}",
+      "totalprice": "${bill.totalprice}",
+    });
+    //print(int.parse(response.body));
+    //return int.parse(response.body);
+    
   }
 
   void calculateTotalPrice() {

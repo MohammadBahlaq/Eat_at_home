@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'package:eat_at_home/controller/data.dart';
+import 'package:eat_at_home/model/bill.dart';
 import 'package:eat_at_home/widgets/cart_card.dart';
 import 'package:eat_at_home/widgets/login_signup_btn.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,7 @@ class Cart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final CartController cartController = context.read<CartController>();
     return Scaffold(
       appBar: AppBar(title: const Text("Cart")),
       body: Stack(
@@ -27,23 +29,21 @@ class Cart extends StatelessWidget {
                       itemCount: cartlength,
                       itemBuilder: (BuildContext context, i) {
                         return CartCard(
-                          image:
-                              "${Data.imgPath}${context.read<CartController>().cart[i].img}",
-                          category:
-                              context.read<CartController>().cart[i].category,
-                          name: context.read<CartController>().cart[i].name,
+                          image: "${Data.imgPath}${cartController.cart[i].img}",
+                          category: cartController.cart[i].category,
+                          name: cartController.cart[i].name,
                           index: i,
                           onClick: () {
-                            context.read<CartController>().deleteFormCart(
-                                context.read<CartController>().cart[i]);
+                            cartController
+                                .deleteFormCart(cartController.cart[i]);
                           },
                           onIncrement: () {
-                            context.read<CartController>().incrementCount(
-                                context.read<CartController>().cart[i]);
+                            cartController
+                                .incrementCount(cartController.cart[i]);
                           },
                           onDecrement: () {
-                            context.read<CartController>().decrementCount(
-                                context.read<CartController>().cart[i]);
+                            cartController
+                                .decrementCount(cartController.cart[i]);
                           },
                         );
                       },
@@ -62,7 +62,20 @@ class Cart extends StatelessWidget {
                   );
                 },
               ),
-              onClick: () {},
+              onClick: () {
+                DateTime date = DateTime.now(); //DateTime(2022, 12, 25, 3, 5)
+                //print("${date.day}/${date.month}/${date.year}");
+                //print("${date.hour.toString().padLeft(2, "0")}:${date.minute.toString().padLeft(2, "0")}");
+                cartController.confirm(
+                  Bill(
+                    date: "${date.day}/${date.month}/${date.year}",
+                    time:
+                        "${date.hour.toString().padLeft(2, "0")}:${date.minute.toString().padLeft(2, "0")}",
+                    status: 1,
+                    totalprice: cartController.totalPrice,
+                  ),
+                );
+              },
               padding: 0,
               borderRadius: 0,
             ),

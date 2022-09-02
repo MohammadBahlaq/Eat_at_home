@@ -19,6 +19,8 @@ class Login extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final CartController cartController = context.read<CartController>();
+    final UserController userController = context.read<UserController>();
     return Scaffold(
       appBar: AppBar(
         title: const Text("Login"),
@@ -80,19 +82,16 @@ class Login extends StatelessWidget {
                     );
                   },
                 );
-                int msg = await context.read<UserController>().login(
-                      txtEmail.text,
-                      txtPassword.text,
-                    );
+                int msg = await userController.login(
+                  txtEmail.text,
+                  txtPassword.text,
+                );
 
                 if (msg == 1) {
-                  context.read<UserController>().setLogin = true;
+                  userController.setLogin = true;
 
-                  await context
-                      .read<CartController>()
-                      .getCart(context.read<UserController>().userInfo!.id);
-                  print(
-                      "Total Price: ${context.read<CartController>().totalPrice}");
+                  await cartController.getCart(userController.userInfo!.id);
+                  print("Total Price: ${cartController.totalPrice}");
                   Navigator.of(context)
                       .pushNamedAndRemoveUntil("home", (route) => false);
                   //Navigator.of(context).pop();

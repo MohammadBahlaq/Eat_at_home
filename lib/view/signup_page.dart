@@ -1,5 +1,4 @@
 // ignore_for_file: avoid_print, use_build_context_synchronously
-//Test three
 
 import 'package:eat_at_home/widgets/custom_dialog.dart';
 import 'package:eat_at_home/widgets/custom_textfield.dart';
@@ -20,6 +19,7 @@ class Signup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final UserController userController = context.read<UserController>();
     return Scaffold(
       appBar: AppBar(title: const Text("Signup")),
       body: ListView(
@@ -104,12 +104,12 @@ class Signup extends StatelessWidget {
                     );
                   },
                 );
-                int msg = await context.read<UserController>().signupUser(
-                      txtEmail.text,
-                      txtPassword.text,
-                      txtName.text,
-                      txtPhone.text,
-                    );
+                int msg = await userController.signupUser(
+                  txtEmail.text,
+                  txtPassword.text,
+                  txtName.text,
+                  txtPhone.text,
+                );
                 if (msg == 0) {
                   Navigator.of(context).pop();
                   showDialog(

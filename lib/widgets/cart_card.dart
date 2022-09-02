@@ -27,30 +27,31 @@ class CartCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final mq = MediaQuery.of(context);
     return Container(
-      margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height / 50),
+      margin: EdgeInsets.only(bottom: mq.size.height / 50),
       padding: const EdgeInsets.all(8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Image.network(
             image,
-            height: MediaQuery.of(context).size.height / 5.5,
-            width: MediaQuery.of(context).size.width / 2.5,
+            height: mq.size.height / 5.5,
+            width: mq.size.width / 2.5,
             fit: category == "Beverages" ? BoxFit.contain : BoxFit.fill,
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
-                width: MediaQuery.of(context).size.width / 3,
+                width: mq.size.width / 3,
                 child: Text(
                   name,
                   style: const TextStyle(fontSize: 18),
                   softWrap: true,
                 ),
               ),
-              SizedBox(height: MediaQuery.of(context).size.height / 50),
+              SizedBox(height: mq.size.height / 50),
               Selector<CartController, double>(
                 selector: (context, p1) {
                   return p1.cart[index].subTotalPrice;

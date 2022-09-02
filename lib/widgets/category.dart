@@ -26,9 +26,12 @@ class Category extends StatelessWidget {
           //ChangeNotifierProvider(create: (context) => CartController()),
         ],
         builder: (context, chilld) {
-          var cartController = context.read<CartController>();
-          var controller = context.read<ProductController>();
-          controller.getProduct(category);
+          final CartController cartController = context.read<CartController>();
+          final ProductController productController =
+              context.read<ProductController>();
+          final UserController userController = context.read<UserController>();
+
+          productController.getProduct(category);
 
           return Selector<ProductController, int>(
             selector: (context, p1) => p1.product.length,
@@ -40,12 +43,12 @@ class Category extends StatelessWidget {
                       itemBuilder: (BuildContext context, i) {
                         return ProductCard(
                           image:
-                              "${Data.imgPath}${controller.product[i].photo}",
+                              "${Data.imgPath}${productController.product[i].photo}",
                           category: category,
-                          name: controller.product[i].name,
-                          price: controller.product[i].price,
+                          name: productController.product[i].name,
+                          price: productController.product[i].price,
                           onClick: () {
-                            context.read<UserController>().isLogin
+                            userController.isLogin
                                 ? showDialog(
                                     context: context,
                                     builder: (context) {
@@ -63,26 +66,25 @@ class Category extends StatelessWidget {
                                         onConfirm: () {
                                           Navigator.of(context).pop();
                                           print(
-                                              "User id add ${context.read<UserController>().userInfo!.id}");
+                                              "User id add ${userController.userInfo!.id}");
                                           cartController.addToCart(
                                             CartP(
-                                              userId: context
-                                                  .read<UserController>()
-                                                  .userInfo!
-                                                  .id,
-                                              mealId: controller.product[i].id,
-                                              name: controller.product[i].name,
-                                              count: context
-                                                  .read<CartController>()
-                                                  .count,
-                                              price:
-                                                  controller.product[i].price,
-                                              subTotalPrice: context
-                                                      .read<CartController>()
-                                                      .count *
-                                                  controller.product[i].price,
+                                              userId:
+                                                  userController.userInfo!.id,
+                                              mealId: productController
+                                                  .product[i].id,
+                                              name: productController
+                                                  .product[i].name,
+                                              count: cartController.count,
+                                              price: productController
+                                                  .product[i].price,
+                                              subTotalPrice:
+                                                  cartController.count *
+                                                      productController
+                                                          .product[i].price,
                                               category: category,
-                                              img: controller.product[i].photo,
+                                              img: productController
+                                                  .product[i].photo,
                                             ),
                                           );
                                         },
