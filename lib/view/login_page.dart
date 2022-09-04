@@ -16,6 +16,7 @@ class Login extends StatelessWidget {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController txtEmail = TextEditingController();
   final TextEditingController txtPassword = TextEditingController();
+  bool isVisiable = false;
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +57,12 @@ class Login extends StatelessWidget {
                   labelText: "Password",
                   icon: Icons.password,
                   keyboardType: TextInputType.visiblePassword,
-                  obscureText: true,
+                  obscureText: isVisiable,
+                  suffixIcon:
+                      isVisiable ? Icons.visibility : Icons.visibility_off,
+                  onVisiable: () {
+                    isVisiable = !isVisiable;
+                  },
                 ),
               ],
             ),

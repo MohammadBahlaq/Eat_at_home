@@ -70,7 +70,7 @@ class CartController with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<int> confirm(Bill bill, List<CartP> products) async {
+  Future<int> confirm(BillP bill, List<CartP> products) async {
     String url = "${Data.apiPath}create_bill.php";
     var response = await http.post(Uri.parse(url), body: {
       "date": bill.date,
@@ -82,9 +82,8 @@ class CartController with ChangeNotifier {
 
     int billID = int.parse(response.body);
     print("Bill id: $billID");
-
+    url = "${Data.apiPath}confirme.php";
     for (CartP product in products) {
-      url = "${Data.apiPath}confirme.php";
       response = await http.post(
         Uri.parse(url),
         body: {

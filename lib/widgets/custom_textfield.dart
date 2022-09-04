@@ -9,6 +9,8 @@ class CustomTextFeild extends StatelessWidget {
     this.keyboardType,
     this.obscureText = false,
     this.validator,
+    this.suffixIcon,
+    this.onVisiable,
   }) : super(key: key);
 
   final String labelText;
@@ -17,7 +19,8 @@ class CustomTextFeild extends StatelessWidget {
   final TextInputType? keyboardType;
   final String? Function(String?)? validator;
   final TextEditingController controller;
-
+  final IconData? suffixIcon;
+  final void Function()? onVisiable;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -28,6 +31,10 @@ class CustomTextFeild extends StatelessWidget {
           labelText: labelText,
           labelStyle: const TextStyle(fontSize: 18),
           prefixIcon: Icon(icon, color: Colors.blue),
+          suffixIcon: IconButton(
+            icon: Icon(suffixIcon),
+            onPressed: onVisiable,
+          ),
           border: const OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(15)),
           ),
