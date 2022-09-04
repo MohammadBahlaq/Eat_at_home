@@ -21,7 +21,7 @@ class Home extends StatelessWidget {
               children: [
                 IconButton(
                   onPressed: () {
-                    if (context.read<UserController>().isLogin) {
+                    if (userController.isLogin) {
                       showDialog(
                         context: context,
                         builder: (context) {
@@ -49,7 +49,7 @@ class Home extends StatelessWidget {
                 IconButton(
                   icon: const Icon(Icons.shopping_cart),
                   onPressed: () {
-                    if (context.read<UserController>().isLogin) {
+                    if (userController.isLogin) {
                       cartController.getCart(
                         userController.userInfo!.id,
                       );

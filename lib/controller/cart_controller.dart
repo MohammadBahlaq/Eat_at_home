@@ -77,6 +77,7 @@ class CartController with ChangeNotifier {
       "time": bill.time,
       "status": "${bill.status}",
       "totalprice": "${bill.totalprice}",
+      "userid": "${products[0].userId}",
     });
 
     int billID = int.parse(response.body);

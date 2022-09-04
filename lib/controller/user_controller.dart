@@ -1,7 +1,6 @@
 // ignore_for_file: avoid_print
 
 import 'dart:convert';
-
 import 'package:eat_at_home/controller/data.dart';
 import 'package:eat_at_home/model/user.dart';
 import 'package:flutter/cupertino.dart';

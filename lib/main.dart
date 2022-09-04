@@ -1,5 +1,6 @@
 import 'package:eat_at_home/controller/cart_controller.dart';
 import 'package:eat_at_home/controller/user_controller.dart';
+import 'package:eat_at_home/view/bill_page.dart';
 import 'package:eat_at_home/view/cart_page.dart';
 import 'package:eat_at_home/view/home_page.dart';
 import 'package:eat_at_home/view/login_page.dart';
@@ -33,6 +34,7 @@ class MyApp extends StatelessWidget {
           "signup": (context) => Signup(),
           "login": (context) => Login(),
           "home": (context) => const Home(),
+          "bill": (context) => const BillP(),
         },
       ),
     );
