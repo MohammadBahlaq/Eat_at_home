@@ -26,7 +26,7 @@ class Signup extends StatelessWidget {
         padding: const EdgeInsets.only(top: 20),
         children: [
           CircleAvatar(
-            backgroundColor: Colors.blue,
+            //backgroundColor: Colors.blue,
             radius: 125,
             child: Image.asset(
               "images/logo.png",

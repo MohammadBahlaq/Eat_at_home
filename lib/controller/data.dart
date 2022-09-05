@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 
 class Data with ChangeNotifier {
   static String apiPath =
-      "http://10.0.2.2/EatAtHome/api/"; //https://mohammadbahlaq.000webhostapp.com/api/
+      "https://mohammadbahlaq.000webhostapp.com/api/"; //http://10.0.2.2/EatAtHome/api/
   static String imgPath =
-      "http://10.0.2.2/EatAtHome/images/"; //https://mohammadbahlaq.000webhostapp.com/images/
+      "https://mohammadbahlaq.000webhostapp.com/images/"; //http://10.0.2.2/EatAtHome/images/
 
   bool isVisiable = true;
 

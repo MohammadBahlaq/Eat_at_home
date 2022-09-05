@@ -18,6 +18,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    MaterialColor primaryAppColor = Colors.lightBlue;
+    //const Color appColor = Colors.red;
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => CartController()),
@@ -28,7 +30,16 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: primaryAppColor,
+          inputDecorationTheme: const InputDecorationTheme(
+              //iconColor: appColor,
+              // focusColor: appColor,
+              // hoverColor: appColor,
+              ),
+          // iconTheme: const IconThemeData(color: appColor),
+          // primaryIconTheme: const IconThemeData(color: appColor),
+          // accentIconTheme: const IconThemeData(color: appColor),
+          // buttonTheme: ButtonThemeData(buttonColor: Colors.red),
         ),
         home: const Home(),
         routes: {

@@ -11,8 +11,8 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final CartController cartController = context.read<CartController>();
-    final UserController userController = context.read<UserController>();
+    // final CartController cartController = context.read<CartController>();
+    // final UserController userController = context.read<UserController>();
     return DefaultTabController(
       length: 5,
       child: Scaffold(

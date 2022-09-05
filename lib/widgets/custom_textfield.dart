@@ -32,7 +32,7 @@ class CustomTextFeild extends StatelessWidget {
         decoration: InputDecoration(
           labelText: labelText,
           labelStyle: const TextStyle(fontSize: 18),
-          prefixIcon: Icon(icon, color: Colors.blue),
+          prefixIcon: Icon(icon), // color: Colors.blue
           suffixIcon: suffixIcon,
           border: const OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(15)),
