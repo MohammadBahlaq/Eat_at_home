@@ -56,56 +56,19 @@ class Cart extends StatelessWidget {
               onClick: () async {
                 DateTime date = DateTime.now();
 
-                await cartController.confirm(
-                          BillP(
-                            date: "${date.day}/${date.month}/${date.year}",
-                            time:
-                                "${date.hour.toString().padLeft(2, "0")}:${date.minute.toString().padLeft(2, "0")}",
-                            status: 1,
-                            totalprice: cartController.totalPrice,
-                          ),
-                          cartController.cart,
-                        ) ==
-                        1
-                    ? showDialog(
-                        context: context,
-                        builder: (context) {
-                          return CustomDialog(
-                            title: "Done",
-                            msg:
-                                "Your order confirmed click OK to tracing your order",
-                            onClick: () async {
-                              Navigator.of(context)
-                                  .pushReplacementNamed("bill");
-                              billController.setLoading(0);
-                              await billController
-                                  .getBill(userController.userInfo!.id);
-                              print(billController.bills.length);
-                              billController.setLoading(1);
-                            },
-                          );
-                        },
-                      )
-                    : ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          duration: const Duration(seconds: 3),
-                          backgroundColor: Colors.blueAccent,
-                          content: Row(
-                            children: [
-                              const Icon(
-                                Icons.error,
-                                size: 25,
-                                color: Colors.white,
-                              ),
-                              SizedBox(width: mq.size.width / 20),
-                              const Text(
-                                "There is an error please try later",
-                                style: TextStyle(fontSize: 16),
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
+                // await cartController.confirm(
+                //           BillP(
+                //             date: "${date.day}/${date.month}/${date.year}",
+                //             time:
+                //                 "${date.hour.toString().padLeft(2, "0")}:${date.minute.toString().padLeft(2, "0")}",
+                //             status: 1,
+                //             totalprice: cartController.totalPrice,
+                //           ),
+                //           cartController.cart,
+                //         ) ==
+                0 == 1
+                    ? showAlertDialog(context, billController, userController)
+                    : showSnackBar(context, mq);
               },
               padding: 0,
               borderRadius: 0,
@@ -113,6 +76,49 @@ class Cart extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  void showSnackBar(BuildContext context, MediaQueryData mq) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        duration: const Duration(seconds: 3),
+        backgroundColor: Colors.redAccent,
+        content: Row(
+          children: [
+            const Icon(
+              Icons.error,
+              size: 25,
+              color: Colors.white,
+            ),
+            SizedBox(width: mq.size.width / 20),
+            const Text(
+              "There is an error please try later",
+              style: TextStyle(fontSize: 16),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void showAlertDialog(BuildContext context, BillController billController,
+      UserController userController) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return CustomDialog(
+          title: "Done",
+          msg: "Your order confirmed click OK to tracing your order",
+          onClick: () async {
+            Navigator.of(context).pushReplacementNamed("bill");
+            billController.setLoading(0);
+            await billController.getBill(userController.userInfo!.id);
+            print(billController.bills.length);
+            billController.setLoading(1);
+          },
+        );
+      },
     );
   }
 }
