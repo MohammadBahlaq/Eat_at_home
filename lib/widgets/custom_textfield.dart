@@ -1,4 +1,6 @@
+import 'package:eat_at_home/controller/data.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class CustomTextFeild extends StatelessWidget {
   const CustomTextFeild({
@@ -19,7 +21,7 @@ class CustomTextFeild extends StatelessWidget {
   final TextInputType? keyboardType;
   final String? Function(String?)? validator;
   final TextEditingController controller;
-  final IconData? suffixIcon;
+  final Widget? suffixIcon;
   final void Function()? onVisiable;
   @override
   Widget build(BuildContext context) {
@@ -31,10 +33,7 @@ class CustomTextFeild extends StatelessWidget {
           labelText: labelText,
           labelStyle: const TextStyle(fontSize: 18),
           prefixIcon: Icon(icon, color: Colors.blue),
-          suffixIcon: IconButton(
-            icon: Icon(suffixIcon),
-            onPressed: onVisiable,
-          ),
+          suffixIcon: suffixIcon,
           border: const OutlineInputBorder(
             borderRadius: BorderRadius.all(Radius.circular(15)),
           ),

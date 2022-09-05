@@ -67,10 +67,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
             IconButton(
               icon: const Icon(Icons.shopping_cart),
-              onPressed: () {
+              onPressed: () async {
                 if (userController.isLogin) {
-                  cartController.getCart(userController.userInfo!.id);
                   Navigator.pushNamed(context, "cart");
+                  cartController.setLoading(0);
+                  await cartController.getCart(userController.userInfo!.id);
+                  cartController.setLoading(1);
                 } else {
                   Navigator.pushNamed(context, "login");
                 }

@@ -3,6 +3,7 @@
 import 'package:eat_at_home/controller/data.dart';
 import 'package:eat_at_home/controller/user_controller.dart';
 import 'package:eat_at_home/model/bill.dart';
+import 'package:eat_at_home/widgets/cart_body.dart';
 import 'package:eat_at_home/widgets/cart_card.dart';
 import 'package:eat_at_home/widgets/custom_dialog.dart';
 import 'package:eat_at_home/widgets/login_signup_btn.dart';
@@ -21,42 +22,23 @@ class Cart extends StatelessWidget {
     // return ChangeNotifierProvider(
     //   create: (context) => BillController(),
     //   builder: (context, child) {
-    //     final BillController billController = context.read<BillController>();
 
     return Scaffold(
       appBar: AppBar(title: const Text("Cart"), centerTitle: true),
       body: Stack(
         alignment: Alignment.bottomCenter,
         children: [
-          Selector<CartController, int>(
-            selector: (context, p1) => p1.cart.length,
-            builder: (context, cartlength, child) {
-              return cartlength == 0
-                  ? const Center(child: CircularProgressIndicator())
-                  : ListView.builder(
-                      padding: const EdgeInsets.only(bottom: 45),
-                      itemCount: cartlength,
-                      itemBuilder: (BuildContext context, i) {
-                        return CartCard(
-                          image: "${Data.imgPath}${cartController.cart[i].img}",
-                          category: cartController.cart[i].category,
-                          name: cartController.cart[i].name,
-                          index: i,
-                          onClick: () {
-                            cartController
-                                .deleteFormCart(cartController.cart[i]);
-                          },
-                          onIncrement: () {
-                            cartController
-                                .incrementCount(cartController.cart[i]);
-                          },
-                          onDecrement: () {
-                            cartController
-                                .decrementCount(cartController.cart[i]);
-                          },
-                        );
-                      },
-                    );
+          Consumer<CartController>(
+            builder: (context, cartController, child) {
+              if (cartController.loading == 0) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (cartController.loading == 1) {
+                return cartController.cart.isEmpty
+                    ? const Center(child: Text("You don't have any item"))
+                    : const CartBuilder();
+              } else {
+                return const CartBuilder();
+              }
             },
           ),
           Padding(
@@ -73,8 +55,7 @@ class Cart extends StatelessWidget {
               ),
               onClick: () async {
                 DateTime date = DateTime.now();
-                //print("${date.day}/${date.month}/${date.year}");
-                //print("${date.hour.toString().padLeft(2, "0")}:${date.minute.toString().padLeft(2, "0")}");
+
                 await cartController.confirm(
                           BillP(
                             date: "${date.day}/${date.month}/${date.year}",
@@ -94,7 +75,6 @@ class Cart extends StatelessWidget {
                             msg:
                                 "Your order confirmed click OK to tracing your order",
                             onClick: () {
-                              //billController.getBill(userController.userInfo!.id);
                               Navigator.of(context)
                                   .pushReplacementNamed("bill");
                             },

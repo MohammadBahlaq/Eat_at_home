@@ -4,13 +4,19 @@ import 'dart:convert';
 import 'package:eat_at_home/controller/data.dart';
 import 'package:eat_at_home/model/Cart.dart';
 import 'package:eat_at_home/model/bill.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:eat_at_home/widgets/cart_body.dart';
+import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class CartController with ChangeNotifier {
   List<CartP> cart = [];
   double totalPrice = 0;
   int count = 1;
+  int loading = 0;
+  Future<void> setLoading(int value) async {
+    loading = value;
+    notifyListeners();
+  }
 
   Future<void> addToCart(CartP product) async {
     totalPrice += product.subTotalPrice;
@@ -47,6 +53,7 @@ class CartController with ChangeNotifier {
 
   Future<void> getCart(int userid) async {
     cart.clear();
+
     String url = "${Data.apiPath}select_cart.php?userid=$userid";
 
     var response = await http.get(Uri.parse(url));
@@ -66,6 +73,7 @@ class CartController with ChangeNotifier {
         ),
       );
     }
+
     calculateTotalPrice();
     notifyListeners();
   }
