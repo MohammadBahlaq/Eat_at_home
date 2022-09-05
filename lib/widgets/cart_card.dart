@@ -57,20 +57,12 @@ class CartCard extends StatelessWidget {
                   return p1.cart[index].subTotalPrice;
                 },
                 builder: (context, value, child) {
-                  //print("rebuild selector line $index");
                   return Text(
                     "${value.toStringAsFixed(2)} JD",
                     style: const TextStyle(fontSize: 18),
                   );
                 },
               ),
-              // Text(
-              //   "${context.select<CartController, double>((p1) {
-              //     print("index = $index");
-              //     return p1.cart[index].subTotalPrice;
-              //   })} JD",
-              //   style: const TextStyle(fontSize: 18),
-              // ),
               Row(
                 children: [
                   CustonButton(

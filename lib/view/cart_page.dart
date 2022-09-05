@@ -1,10 +1,9 @@
 // ignore_for_file: avoid_print
 
-import 'package:eat_at_home/controller/data.dart';
+import 'package:eat_at_home/controller/bill_controller.dart';
 import 'package:eat_at_home/controller/user_controller.dart';
 import 'package:eat_at_home/model/bill.dart';
 import 'package:eat_at_home/widgets/cart_body.dart';
-import 'package:eat_at_home/widgets/cart_card.dart';
 import 'package:eat_at_home/widgets/custom_dialog.dart';
 import 'package:eat_at_home/widgets/login_signup_btn.dart';
 import 'package:flutter/material.dart';
@@ -18,23 +17,24 @@ class Cart extends StatelessWidget {
   Widget build(BuildContext context) {
     final CartController cartController = context.read<CartController>();
     final UserController userController = context.read<UserController>();
+    final billController = context.read<BillController>();
     final mq = MediaQuery.of(context);
-    // return ChangeNotifierProvider(
-    //   create: (context) => BillController(),
-    //   builder: (context, child) {
 
     return Scaffold(
       appBar: AppBar(title: const Text("Cart"), centerTitle: true),
       body: Stack(
         alignment: Alignment.bottomCenter,
         children: [
-          Consumer<CartController>(
-            builder: (context, cartController, child) {
-              if (cartController.loading == 0) {
+          Selector<CartController, int>(
+            selector: (p0, p1) => p1.loading,
+            builder: (context, loading, child) {
+              if (loading == 0) {
                 return const Center(child: CircularProgressIndicator());
-              } else if (cartController.loading == 1) {
+              } else if (loading == 1) {
                 return cartController.cart.isEmpty
-                    ? const Center(child: Text("You don't have any item"))
+                    ? const Center(
+                        child: Text("You don't have any item",
+                            style: TextStyle(fontSize: 18)))
                     : const CartBuilder();
               } else {
                 return const CartBuilder();
@@ -74,9 +74,14 @@ class Cart extends StatelessWidget {
                             title: "Done",
                             msg:
                                 "Your order confirmed click OK to tracing your order",
-                            onClick: () {
+                            onClick: () async {
                               Navigator.of(context)
                                   .pushReplacementNamed("bill");
+                              billController.setLoading(0);
+                              await billController
+                                  .getBill(userController.userInfo!.id);
+                              print(billController.bills.length);
+                              billController.setLoading(1);
                             },
                           );
                         },
@@ -109,7 +114,5 @@ class Cart extends StatelessWidget {
         ],
       ),
     );
-    //},
-    //);
   }
 }

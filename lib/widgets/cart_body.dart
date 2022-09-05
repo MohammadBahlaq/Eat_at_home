@@ -15,23 +15,29 @@ class CartBuilder extends StatelessWidget {
     final CartController cartController = context.read<CartController>();
     final mq = MediaQuery.of(context);
 
-    return ListView.builder(
-      padding: EdgeInsets.only(bottom: mq.size.height * 0.07),
-      itemCount: cartController.cart.length,
-      itemBuilder: (BuildContext context, i) {
-        return CartCard(
-          image: "${Data.imgPath}${cartController.cart[i].img}",
-          category: cartController.cart[i].category,
-          name: cartController.cart[i].name,
-          index: i,
-          onClick: () {
-            cartController.deleteFormCart(cartController.cart[i]);
-          },
-          onIncrement: () {
-            cartController.incrementCount(cartController.cart[i]);
-          },
-          onDecrement: () {
-            cartController.decrementCount(cartController.cart[i]);
+    return Selector<CartController, int>(
+      selector: (p0, p1) => p1.cart.length,
+      builder: (context, value, child) {
+        return ListView.builder(
+          padding: EdgeInsets.only(bottom: mq.size.height * 0.07),
+          itemCount: cartController.cart.length,
+          itemBuilder: (BuildContext context, i) {
+            return CartCard(
+              image: "${Data.imgPath}${cartController.cart[i].img}",
+              category: cartController.cart[i].category,
+              name: cartController.cart[i].name,
+              index: i,
+              onClick: () {
+                cartController.deleteFormCart(cartController.cart[i]);
+                print(i);
+              },
+              onIncrement: () {
+                cartController.incrementCount(cartController.cart[i]);
+              },
+              onDecrement: () {
+                cartController.decrementCount(cartController.cart[i]);
+              },
+            );
           },
         );
       },

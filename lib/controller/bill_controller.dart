@@ -6,6 +6,12 @@ import 'package:http/http.dart' as http;
 
 class BillController with ChangeNotifier {
   List<BillP> bills = [];
+  int loading = 0;
+
+  Future<void> setLoading(int value) async {
+    loading = value;
+    notifyListeners();
+  }
 
   Future<void> getBill(int userid) async {
     bills.clear();

@@ -1,3 +1,4 @@
+import 'package:eat_at_home/controller/bill_controller.dart';
 import 'package:eat_at_home/controller/cart_controller.dart';
 import 'package:eat_at_home/controller/user_controller.dart';
 import 'package:eat_at_home/view/bill_page.dart';
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => CartController()),
         ChangeNotifierProvider(create: (context) => UserController()),
+        ChangeNotifierProvider(create: (context) => BillController())
       ],
       child: MaterialApp(
         title: 'Flutter Demo',

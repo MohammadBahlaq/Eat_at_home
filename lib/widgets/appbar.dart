@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:eat_at_home/controller/bill_controller.dart';
 import 'package:eat_at_home/controller/cart_controller.dart';
 import 'package:eat_at_home/controller/data.dart';
 import 'package:eat_at_home/controller/user_controller.dart';
@@ -17,6 +18,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final CartController cartController = context.read<CartController>();
     final UserController userController = context.read<UserController>();
+    final BillController billController = context.read<BillController>();
+
     final mq = MediaQuery.of(context);
     return AppBar(
       actions: [
@@ -29,9 +32,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   "${Data.imgPath}Bill Icon.svg",
                   color: Colors.white,
                 ),
-                onTap: () {
+                onTap: () async {
                   if (userController.isLogin) {
                     Navigator.pushNamed(context, "bill");
+                    billController.setLoading(0);
+                    await billController.getBill(userController.userInfo!.id);
+                    billController.setLoading(1);
                   } else {
                     Navigator.pushNamed(context, "login");
                   }
