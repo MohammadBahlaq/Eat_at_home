@@ -1,5 +1,4 @@
 import 'package:eat_at_home/controller/bill_controller.dart';
-import 'package:eat_at_home/controller/user_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -21,19 +20,37 @@ class BillBuilder extends StatelessWidget {
               vertical: mq.size.height * 0.013,
               horizontal: mq.size.width * 0.03,
             ),
-            child: ListTile(
-              tileColor: billController.bills[i].status == 1
-                  ? Colors.green
-                  : Colors.red,
-              leading: Text("Bill No: ${billController.bills[i].id}"),
-              title: Text(
-                billController.bills[i].status == 1 ? "In progrecess" : "Done",
+            child: Material(
+              elevation: 15,
+              shape: Theme.of(context).listTileTheme.shape,
+              child: ListTile(
+                contentPadding: EdgeInsets.symmetric(
+                  vertical: mq.size.height * 0.013,
+                  horizontal: mq.size.width * 0.03,
+                ),
+                tileColor: billController.bills[i].status == 1
+                    ? Theme.of(context).primaryColor
+                    : Colors.grey,
+                enabled: billController.bills[i].status == 1 ? true : false,
+                leading: Text(
+                  "Bill No: ${billController.bills[i].id}",
+                  style: const TextStyle(fontSize: 18),
+                ),
+                title: Text(
+                  billController.bills[i].status == 1
+                      ? "In progrecess"
+                      : "Done",
+                  style: const TextStyle(fontSize: 18),
+                ),
+                subtitle: Text(
+                  "${billController.bills[i].date} - ${billController.bills[i].time}",
+                  style: const TextStyle(fontSize: 15),
+                ),
+                trailing: Text(
+                  "${billController.bills[i].totalprice.toStringAsFixed(2)} JD",
+                  style: const TextStyle(fontSize: 16),
+                ),
               ),
-              subtitle: Text(
-                "${billController.bills[i].date} - ${billController.bills[i].time}",
-              ),
-              trailing: Text(
-                  "${billController.bills[i].totalprice.toStringAsFixed(2)} JD"),
             ),
           );
         },

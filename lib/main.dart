@@ -29,7 +29,13 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           primarySwatch: Colors.deepPurple,
+          primaryColor: Colors.deepPurpleAccent,
           inputDecorationTheme: const InputDecorationTheme(),
+          listTileTheme: ListTileThemeData(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+          ),
         ),
         home: const Home(),
         routes: {

@@ -2,7 +2,7 @@
 
 import 'dart:convert';
 
-import 'package:eat_at_home/controller/data.dart';
+import 'package:eat_at_home/controller/data_controller.dart';
 import 'package:eat_at_home/model/product.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;

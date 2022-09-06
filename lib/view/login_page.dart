@@ -1,6 +1,6 @@
 // ignore_for_file: avoid_print, use_build_context_synchronously
 
-import 'package:eat_at_home/controller/data.dart';
+import 'package:eat_at_home/controller/data_controller.dart';
 import 'package:eat_at_home/controller/user_controller.dart';
 import 'package:eat_at_home/widgets/custom_dialog.dart';
 import 'package:eat_at_home/widgets/custom_textfield.dart';

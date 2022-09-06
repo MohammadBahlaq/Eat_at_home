@@ -1,7 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'dart:convert';
-import 'package:eat_at_home/controller/data.dart';
+import 'package:eat_at_home/controller/data_controller.dart';
 import 'package:eat_at_home/model/Cart.dart';
 import 'package:eat_at_home/model/bill.dart';
 import 'package:flutter/material.dart';

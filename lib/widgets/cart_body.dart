@@ -1,4 +1,4 @@
-import 'package:eat_at_home/controller/data.dart';
+import 'package:eat_at_home/controller/data_controller.dart';
 import 'package:eat_at_home/model/bill.dart';
 import 'package:eat_at_home/widgets/cart_card.dart';
 import 'package:eat_at_home/widgets/custom_dialog.dart';

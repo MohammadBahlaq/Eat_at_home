@@ -2,7 +2,7 @@
 
 import 'package:eat_at_home/controller/bill_controller.dart';
 import 'package:eat_at_home/controller/cart_controller.dart';
-import 'package:eat_at_home/controller/data.dart';
+import 'package:eat_at_home/controller/data_controller.dart';
 import 'package:eat_at_home/controller/user_controller.dart';
 import 'package:eat_at_home/widgets/custom_dialog.dart';
 import 'package:flutter/material.dart';
