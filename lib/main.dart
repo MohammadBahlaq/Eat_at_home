@@ -28,8 +28,8 @@ class MyApp extends StatelessWidget {
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primarySwatch: Colors.deepPurple,
-          primaryColor: Colors.deepPurpleAccent,
+          primarySwatch: Colors.blue,
+          primaryColor: Colors.blueAccent,
           inputDecorationTheme: const InputDecorationTheme(),
           listTileTheme: ListTileThemeData(
             shape: RoundedRectangleBorder(
