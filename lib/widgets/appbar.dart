@@ -28,8 +28,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             Padding(
               padding: EdgeInsets.only(right: mq.size.width * 0.04),
               child: InkWell(
-                child: SvgPicture.network(
-                  "${Data.imgPath}Bill Icon.svg",
+                child: SvgPicture.asset(
+                  "images/Bill Icon.svg",
                   color: Colors.white,
                 ),
                 onTap: () async {

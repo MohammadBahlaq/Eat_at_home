@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
           primaryColor: Colors.blueAccent,
           inputDecorationTheme: const InputDecorationTheme(),
           listTileTheme: ListTileThemeData(
+            textColor: Colors.white,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
             ),
