@@ -42,10 +42,21 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.blue,
             primaryColor: Colors.blueAccent,
             inputDecorationTheme: const InputDecorationTheme(),
-            listTileTheme: ListTileThemeData(
-              textColor: Colors.white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
+            textTheme: TextTheme(
+              headline1: const TextStyle(
+                color: Colors.grey,
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
+              ),
+              headline2: const TextStyle(
+                color: Colors.black,
+                fontSize: 20,
+                fontWeight: FontWeight.w500,
+              ),
+              headline3: TextStyle(
+                color: Colors.brown.shade300,
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
               ),
             ),
           ),
