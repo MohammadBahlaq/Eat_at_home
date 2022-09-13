@@ -1,4 +1,5 @@
 import 'package:eat_at_home/controller/bill_controller.dart';
+import 'package:eat_at_home/widgets/order_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -13,6 +14,7 @@ class BillBuilder extends StatelessWidget {
     return Selector<BillController, int>(
       selector: (p0, p1) => p1.bills.length,
       builder: (context, billLength, child) => ListView.builder(
+        padding: EdgeInsets.only(top: mq.size.height * 0.02),
         itemCount: billLength,
         itemBuilder: (context, i) {
           return Padding(
@@ -21,9 +23,20 @@ class BillBuilder extends StatelessWidget {
               horizontal: mq.size.width * 0.03,
             ),
             child: Material(
-              elevation: 15,
+              elevation: 2,
               shape: Theme.of(context).listTileTheme.shape,
-              child: ListTile(
+              child:
+                  // OrderCard(
+                  //   index: i,
+                  //   orderId: billController.bills[i].id!,
+                  //   totalPrice: billController.bills[i].totalprice,
+                  //   date: billController.bills[i].date,
+                  //   time: billController.bills[i].time,
+                  //   status: billController.bills[i].status,
+                  //   mobile: "0770355390",
+                  //   onCadrClick: () {},
+                  // ),
+                  ListTile(
                 contentPadding: EdgeInsets.symmetric(
                   vertical: mq.size.height * 0.013,
                   horizontal: mq.size.width * 0.03,
@@ -50,6 +63,10 @@ class BillBuilder extends StatelessWidget {
                   "${billController.bills[i].totalprice.toStringAsFixed(2)} JD",
                   style: const TextStyle(fontSize: 16),
                 ),
+                onTap: () async {
+                  Navigator.of(context).pushNamed("detailes");
+                  await billController.getItems(billController.bills[i].id!);
+                },
               ),
             ),
           );

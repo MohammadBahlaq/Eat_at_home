@@ -1,7 +1,6 @@
 // ignore_for_file: avoid_print
 
 import 'package:eat_at_home/controller/bill_controller.dart';
-import 'package:eat_at_home/controller/user_controller.dart';
 import 'package:eat_at_home/widgets/bill_body.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -23,18 +22,16 @@ class Bill extends StatelessWidget {
         builder: (context, loading, child) {
           if (loading == 0) {
             return const Center(child: CircularProgressIndicator());
-          } else if (loading == 1) {
+          } else {
             return billController.bills.isEmpty
                 ? const Center(
                     child: Text("You don't have any bill",
                         style: TextStyle(fontSize: 18)),
                   )
                 : const BillBuilder();
-          } else {
-            return const BillBuilder();
           }
         },
       ),
-    ); //
+    );
   }
 }

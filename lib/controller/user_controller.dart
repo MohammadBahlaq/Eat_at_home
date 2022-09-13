@@ -38,7 +38,10 @@ class UserController with ChangeNotifier {
 
     var response = await http.post(
       Uri.parse(url),
-      body: {"email": email, "password": password},
+      body: {
+        "email": email,
+        "password": password,
+      },
     );
 
     var userData = jsonDecode(response.body);
@@ -52,6 +55,7 @@ class UserController with ChangeNotifier {
         name: userData['name'],
         mobile: userData['mobile'],
       );
+      setLogin = true;
       return 1;
     } else {
       return 0;

@@ -9,17 +9,18 @@ import 'package:string_validator/string_validator.dart';
 import '../controller/user_controller.dart';
 
 class Signup extends StatelessWidget {
-  Signup({Key? key}) : super(key: key);
-
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final TextEditingController txtName = TextEditingController();
-  final TextEditingController txtEmail = TextEditingController();
-  final TextEditingController txtPassword = TextEditingController();
-  final TextEditingController txtPhone = TextEditingController();
+  const Signup({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final UserController userController = context.read<UserController>();
+
+    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+    final TextEditingController txtName = TextEditingController();
+    final TextEditingController txtEmail = TextEditingController();
+    final TextEditingController txtPassword = TextEditingController();
+    final TextEditingController txtPhone = TextEditingController();
+
     return Scaffold(
       appBar: AppBar(title: const Text("Signup")),
       body: ListView(

@@ -1,11 +1,13 @@
 import 'dart:convert';
 import 'package:eat_at_home/controller/data_controller.dart';
 import 'package:eat_at_home/model/bill.dart';
+import 'package:eat_at_home/model/meal.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 class BillController with ChangeNotifier {
   List<BillP> bills = [];
+  List meals = [];
   int loading = 0;
 
   Future<void> setLoading(int value) async {
@@ -33,7 +35,27 @@ class BillController with ChangeNotifier {
         ),
       );
     }
-    print(bills.length);
+    notifyListeners();
+  }
+
+  Future<void> getItems(int billID) async {
+    meals.clear();
+    String url = "${Data.apiPath}select_items_bill.php?billid=$billID";
+
+    var response = await http.get(Uri.parse(url));
+    var responsebody = jsonDecode(response.body);
+
+    for (var meal in responsebody) {
+      meals.add(
+        Meal(
+          name: meal['name'],
+          category: meal['category'],
+          image: meal['photo'],
+          count: meal['count'],
+          subPrice: meal['sub_price'],
+        ),
+      );
+    }
     notifyListeners();
   }
 }

@@ -8,24 +8,24 @@ import 'package:eat_at_home/widgets/login_signup_btn.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:string_validator/string_validator.dart';
-
 import '../controller/cart_controller.dart';
 
 class Login extends StatelessWidget {
-  Login({Key? key}) : super(key: key);
-
-  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final TextEditingController txtEmail = TextEditingController();
-  final TextEditingController txtPassword = TextEditingController();
-  bool isVisiable = false;
+  const Login({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final CartController cartController = context.read<CartController>();
     final UserController userController = context.read<UserController>();
+
+    final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+    final TextEditingController txtEmail = TextEditingController();
+    final TextEditingController txtPassword = TextEditingController();
+
     return ChangeNotifierProvider(
       create: (context) => Data(),
       builder: (context, child) {
+        final Data dataController = context.read<Data>();
         return Scaffold(
           appBar: AppBar(
             title: const Text("Login"),
@@ -34,11 +34,9 @@ class Login extends StatelessWidget {
             padding: const EdgeInsets.only(top: 20),
             children: [
               CircleAvatar(
-                //backgroundColor: Colors.blue,
                 radius: 125,
                 child: Image.asset(
                   "images/logo.png",
-                  //height: MediaQuery.of(context).size.height * 0.3,
                 ),
               ),
               Form(
@@ -72,7 +70,7 @@ class Login extends StatelessWidget {
                                   : Icons.visibility_off,
                             ),
                             onPressed: () {
-                              context.read<Data>().visibility();
+                              dataController.visibility();
                             },
                           ),
                         );
@@ -81,52 +79,42 @@ class Login extends StatelessWidget {
                   ],
                 ),
               ),
+              Row(
+                children: [
+                  Selector<Data, bool>(
+                    selector: (p0, p1) => p1.remember,
+                    builder: (context, remember, child) => Checkbox(
+                      value: remember,
+                      onChanged: (value) {
+                        dataController.setRemember();
+                      },
+                    ),
+                  ),
+                  const Text("Remember me", style: TextStyle(fontSize: 15)),
+                ],
+              ),
               CustomButton(
                 text: const Text("Login", style: TextStyle(fontSize: 18)),
                 onClick: () async {
                   if (formKey.currentState!.validate()) {
-                    showDialog(
-                      context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          content: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              const Text("Loading...",
-                                  style: TextStyle(fontSize: 18)),
-                              SizedBox(
-                                  height:
-                                      MediaQuery.of(context).size.height / 25),
-                              const CircularProgressIndicator(),
-                            ],
-                          ),
-                        );
-                      },
-                    );
-                    int msg = await userController.login(
+                    showLoadingDialog(context);
+                    final int msg = await userController.login(
                       txtEmail.text,
                       txtPassword.text,
                     );
 
                     if (msg == 1) {
-                      userController.setLogin = true;
-
-                      await cartController.getCart(userController.userInfo!.id);
-                      print("Total Price: ${cartController.totalPrice}");
+                      //userController.setLogin = true;
+                      cartController.getCart(userController.userInfo!.id);
                       Navigator.of(context)
                           .pushNamedAndRemoveUntil("home", (route) => false);
+                      if (dataController.remember) {
+                        dataController.checkRemember(
+                            txtEmail.text, txtPassword.text);
+                      }
                     } else {
                       Navigator.of(context).pop();
-                      showDialog(
-                        context: context,
-                        builder: ((context) => CustomDialog(
-                              title: "Ivalid Login",
-                              msg: "User name or Password is not correct",
-                              onClick: () {
-                                Navigator.of(context).pop();
-                              },
-                            )),
-                      );
+                      showErrorAlertDialog(context);
                     }
                   }
                 },
@@ -139,10 +127,12 @@ class Login extends StatelessWidget {
                     style: TextStyle(fontSize: 17),
                   ),
                   InkWell(
-                    child: const Text(
+                    child: Text(
                       "Signup",
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Theme.of(context).primaryColor),
                     ),
                     onTap: () {
                       Navigator.of(context).pushNamed("signup");
@@ -154,6 +144,37 @@ class Login extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+
+  showLoadingDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text("Loading...", style: TextStyle(fontSize: 18)),
+              SizedBox(height: MediaQuery.of(context).size.height / 25),
+              const CircularProgressIndicator(),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  showErrorAlertDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: ((context) => CustomDialog(
+            title: "Ivalid Login",
+            msg: "User name or Password is not correct",
+            onClick: () {
+              Navigator.of(context).pop();
+            },
+          )),
     );
   }
 }

@@ -56,20 +56,22 @@ class Cart extends StatelessWidget {
               onClick: () async {
                 DateTime date = DateTime.now();
 
-                await cartController.confirm(
-                          BillP(
-                            date: "${date.day}/${date.month}/${date.year}",
-                            time:
-                                "${date.hour.toString().padLeft(2, "0")}:${date.minute.toString().padLeft(2, "0")}",
-                            status: 1,
-                            totalprice: cartController.totalPrice,
-                          ),
-                          cartController.cart,
-                        ) ==
-                        1
-                    // 0 == 1
-                    ? showAlertDialog(context, billController, userController)
-                    : showSnackBar(context, mq);
+                if (cartController.cart.isNotEmpty) {
+                  await cartController.confirm(
+                            BillP(
+                              date: "${date.day}/${date.month}/${date.year}",
+                              time:
+                                  "${date.hour.toString().padLeft(2, "0")}:${date.minute.toString().padLeft(2, "0")}",
+                              status: 1,
+                              totalprice: cartController.totalPrice,
+                            ),
+                            cartController.cart,
+                          ) ==
+                          1
+                      // 0 == 1
+                      ? showAlertDialog(context, billController, userController)
+                      : showSnackBar(context, mq);
+                }
               },
               padding: 0,
               borderRadius: 0,
