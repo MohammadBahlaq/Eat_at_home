@@ -50,7 +50,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 badgeContent: Selector<CartController, int>(
                   selector: (context, cartC) => cartC.cart.length,
                   builder: ((context, length, child) {
-                    print("length of Cart: $length");
                     return Text(
                       "$length",
                       style: const TextStyle(color: Colors.white),

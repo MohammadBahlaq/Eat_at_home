@@ -1,3 +1,4 @@
+import 'package:eat_at_home/controller/user_controller.dart';
 import 'package:eat_at_home/widgets/appbar.dart';
 import 'package:eat_at_home/widgets/login_signup_btn.dart';
 import 'package:flutter/material.dart';
@@ -10,8 +11,9 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final CartController cartController = context.read<CartController>();
-    // final UserController userController = context.read<UserController>();
+    final CartController cartController = context.read<CartController>();
+    final UserController userController = context.read<UserController>();
+    final mq = MediaQuery.of(context);
     return DefaultTabController(
       length: 5,
       child: Scaffold(
@@ -52,13 +54,52 @@ class Home extends StatelessWidget {
                 text: Selector<CartController, double>(
                   selector: (context, p1) => p1.totalPrice,
                   builder: (context, totalPrice, child) {
-                    return Text(
-                      "Confirm your order (${totalPrice.toStringAsFixed(2)} JD)",
-                      style: const TextStyle(fontSize: 18),
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              margin:
+                                  EdgeInsets.only(right: mq.size.width * 0.025),
+                              alignment: Alignment.center,
+                              height: mq.size.height * 0.033,
+                              width: mq.size.width * 0.064,
+                              decoration: BoxDecoration(
+                                color: Colors.blue.shade200,
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                              child: Text(
+                                "${cartController.cart.length} ",
+                                style: const TextStyle(
+                                    fontSize: 18, color: Colors.white),
+                              ),
+                            ),
+                            const Text(
+                              "See your basket",
+                              style: TextStyle(fontSize: 18),
+                            ),
+                          ],
+                        ),
+                        Text(
+                          "${totalPrice.toStringAsFixed(2)} JD",
+                          style: const TextStyle(fontSize: 18),
+                        ),
+                      ],
                     );
                   },
                 ),
-                onClick: () async {},
+                onClick: () async {
+                  if (userController.isLogin) {
+                    Navigator.pushNamed(context, "cart");
+                    cartController.setLoading(0);
+                    await cartController.getCart(userController.userInfo!.id);
+                    cartController.setLoading(1);
+                  } else {
+                    Navigator.pushNamed(context, "login");
+                  }
+                },
               ),
             )
           ],

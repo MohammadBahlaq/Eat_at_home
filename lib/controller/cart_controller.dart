@@ -55,12 +55,11 @@ class CartController with ChangeNotifier {
   }
 
   Future<void> getCart(int userid) async {
-    cart.clear();
-
     String url = "${Data.apiPath}select_cart.php?userid=$userid";
 
     var response = await http.get(Uri.parse(url));
     List responsebody = jsonDecode(response.body);
+    cart.clear();
     for (var element in responsebody) {
       cart.add(
         CartP(
