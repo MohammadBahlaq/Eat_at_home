@@ -31,7 +31,8 @@ class CountDialog extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               CustonButton(
-                icon: const Icon(Icons.add),
+                icon: const Icon(Icons.add, color: Colors.green),
+                color: Colors.transparent,
                 onClick: onIncrement,
               ),
               Selector<CartController, int>(
@@ -46,7 +47,8 @@ class CountDialog extends StatelessWidget {
                 },
               ),
               CustonButton(
-                icon: const Icon(Icons.remove),
+                icon: const Icon(Icons.remove, color: Colors.red),
+                color: Colors.transparent,
                 onClick: onDecrement,
               ),
             ],
@@ -54,7 +56,7 @@ class CountDialog extends StatelessWidget {
           SizedBox(height: mq.size.height / 36),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              primary: Colors.black,
+              //backgroundColor: Colors.blue,
               fixedSize: Size(
                 mq.size.width / 2,
                 mq.size.height / 15,

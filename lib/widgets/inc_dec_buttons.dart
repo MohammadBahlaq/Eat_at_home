@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class CustonButton extends StatelessWidget {
   const CustonButton({
     Key? key,
-    this.color = Colors.black,
+    this.color = Colors.transparent,
     this.padding = 8,
     required this.icon,
     required this.onClick,
@@ -18,7 +18,7 @@ class CustonButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(padding),
+      padding: EdgeInsets.symmetric(horizontal: padding),
       child: CircleAvatar(
         backgroundColor: color,
         child: IconButton(

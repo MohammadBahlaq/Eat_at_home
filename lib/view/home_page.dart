@@ -1,9 +1,8 @@
 import 'package:eat_at_home/widgets/appbar.dart';
-import 'package:eat_at_home/widgets/custom_dialog.dart';
+import 'package:eat_at_home/widgets/login_signup_btn.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../controller/cart_controller.dart';
-import '../controller/user_controller.dart';
 import '../widgets/category.dart';
 
 class Home extends StatelessWidget {
@@ -35,13 +34,33 @@ class Home extends StatelessWidget {
             isScrollable: true,
           ),
         ),
-        body: const TabBarView(
+        body: Stack(
+          alignment: Alignment.bottomCenter,
           children: [
-            Category(category: "Pizza"),
-            Category(category: "Sandwich"),
-            Category(category: "Salad"),
-            Category(category: "Beverages"),
-            Category(category: "Extra"),
+            const TabBarView(
+              children: [
+                Category(category: "Pizza"),
+                Category(category: "Sandwich"),
+                Category(category: "Salad"),
+                Category(category: "Beverages"),
+                Category(category: "Extra"),
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 8),
+              child: CustomButton(
+                text: Selector<CartController, double>(
+                  selector: (context, p1) => p1.totalPrice,
+                  builder: (context, totalPrice, child) {
+                    return Text(
+                      "Confirm your order (${totalPrice.toStringAsFixed(2)} JD)",
+                      style: const TextStyle(fontSize: 18),
+                    );
+                  },
+                ),
+                onClick: () async {},
+              ),
+            )
           ],
         ),
       ),

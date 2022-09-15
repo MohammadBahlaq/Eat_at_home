@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:badges/badges.dart';
 import 'package:eat_at_home/controller/bill_controller.dart';
 import 'package:eat_at_home/controller/cart_controller.dart';
 import 'package:eat_at_home/controller/user_controller.dart';
@@ -43,6 +44,37 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 },
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Badge(
+                badgeContent: Selector<CartController, int>(
+                  selector: (context, cartC) => cartC.cart.length,
+                  builder: ((context, length, child) {
+                    print("length of Cart: $length");
+                    return Text(
+                      "$length",
+                      style: const TextStyle(color: Colors.white),
+                    );
+                  }),
+                ),
+                animationType: BadgeAnimationType.scale,
+                position: BadgePosition.topEnd(end: 0, top: -4),
+                child: IconButton(
+                  icon: const Icon(Icons.shopping_cart),
+                  iconSize: 25,
+                  onPressed: () async {
+                    if (userController.isLogin) {
+                      Navigator.pushNamed(context, "cart");
+                      cartController.setLoading(0);
+                      await cartController.getCart(userController.userInfo!.id);
+                      cartController.setLoading(1);
+                    } else {
+                      Navigator.pushNamed(context, "login");
+                    }
+                  },
+                ),
+              ),
+            ),
             IconButton(
               onPressed: () {
                 if (userController.isLogin) {
@@ -69,24 +101,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                   return Icon(isLogin ? Icons.logout : Icons.login);
                 },
               ),
-            ),
-            IconButton(
-              icon: const Icon(Icons.shopping_cart),
-              onPressed: () async {
-                if (userController.isLogin) {
-                  Navigator.pushNamed(context, "cart");
-                  cartController.setLoading(0);
-                  await cartController.getCart(userController.userInfo!.id);
-                  cartController.setLoading(1);
-                } else {
-                  Navigator.pushNamed(context, "login");
-                }
-              },
-            ),
-            Selector<CartController, double>(
-              selector: (context, cart) => cart.totalPrice,
-              builder: ((context, value, child) =>
-                  Text(value.toStringAsFixed(2))),
             ),
           ],
         ),

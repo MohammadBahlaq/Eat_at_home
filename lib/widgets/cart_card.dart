@@ -30,15 +30,21 @@ class CartCard extends StatelessWidget {
     final mq = MediaQuery.of(context);
     return Container(
       margin: EdgeInsets.only(bottom: mq.size.height / 50),
-      padding: const EdgeInsets.all(8),
+      padding: EdgeInsets.symmetric(
+        horizontal: mq.size.width * 0.025,
+        vertical: mq.size.height * 0.013,
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Image.network(
-            image,
-            height: mq.size.height / 5.5,
-            width: mq.size.width / 2.5,
-            fit: category == "Beverages" ? BoxFit.contain : BoxFit.fill,
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Image.network(
+              image,
+              height: mq.size.height * 0.13,
+              width: mq.size.width * 0.28,
+              fit: category == "Beverages" ? BoxFit.contain : BoxFit.fill,
+            ),
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -52,22 +58,10 @@ class CartCard extends StatelessWidget {
                 ),
               ),
               SizedBox(height: mq.size.height / 50),
-              Selector<CartController, double>(
-                selector: (context, p1) {
-                  return p1.cart[index].subTotalPrice;
-                },
-                builder: (context, value, child) {
-                  return Text(
-                    "${value.toStringAsFixed(2)} JD",
-                    style: const TextStyle(fontSize: 18),
-                  );
-                },
-              ),
               Row(
                 children: [
                   CustonButton(
-                    icon: const Icon(Icons.add),
-                    color: Colors.green,
+                    icon: const Icon(Icons.add, color: Colors.green),
                     onClick: onIncrement,
                   ),
                   Selector<CartController, int>(
@@ -84,19 +78,24 @@ class CartCard extends StatelessWidget {
                     },
                   ),
                   CustonButton(
-                    icon: const Icon(Icons.remove),
-                    color: Colors.red,
+                    icon: const Icon(Icons.remove, color: Colors.red),
                     onClick: onDecrement,
                   ),
                 ],
               ),
             ],
           ),
-          CustonButton(
-            icon: const Icon(Icons.remove),
-            padding: 0,
-            onClick: onClick,
-          ),
+          Selector<CartController, double>(
+            selector: (context, p1) {
+              return p1.cart[index].subTotalPrice;
+            },
+            builder: (context, value, child) {
+              return Text(
+                "${value.toStringAsFixed(2)} JD",
+                style: const TextStyle(fontSize: 18),
+              );
+            },
+          )
         ],
       ),
     );

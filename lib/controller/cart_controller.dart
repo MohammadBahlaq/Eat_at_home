@@ -30,7 +30,10 @@ class CartController with ChangeNotifier {
         "subprice": "${product.subTotalPrice}",
       },
     );
-    print(jsonDecode(response.body));
+    //print(jsonDecode(response.body));
+    if (jsonDecode(response.body) == 1) {
+      cart.add(product);
+    }
     ////////////////////////////////////
     count = 1;
     notifyListeners();
@@ -129,6 +132,8 @@ class CartController with ChangeNotifier {
       product.subTotalPrice -= product.price;
       totalPrice -= product.price;
       notifyListeners();
+    } else {
+      deleteFormCart(product);
     }
   }
 

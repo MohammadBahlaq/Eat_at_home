@@ -109,8 +109,8 @@ class Login extends StatelessWidget {
                       Navigator.of(context)
                           .pushNamedAndRemoveUntil("home", (route) => false);
                       if (dataController.remember) {
-                        dataController.checkRemember(
-                            txtEmail.text, txtPassword.text);
+                        dataController.checkRemember(txtEmail.text,
+                            txtPassword.text, userController.userInfo!.id);
                       }
                     } else {
                       Navigator.of(context).pop();

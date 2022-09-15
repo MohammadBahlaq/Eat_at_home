@@ -54,6 +54,24 @@ class Cart extends StatelessWidget {
                 },
               ),
               onClick: () async {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      content: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Text("Loading...",
+                              style: TextStyle(fontSize: 18)),
+                          SizedBox(
+                              height: MediaQuery.of(context).size.height / 25),
+                          const CircularProgressIndicator(),
+                        ],
+                      ),
+                    );
+                  },
+                );
+
                 DateTime date = DateTime.now();
 
                 if (cartController.cart.isNotEmpty) {
@@ -73,8 +91,8 @@ class Cart extends StatelessWidget {
                       : showSnackBar(context, mq);
                 }
               },
-              padding: 0,
-              borderRadius: 0,
+              //padding: 0,
+              //borderRadius: 0,
             ),
           ),
         ],
@@ -83,6 +101,7 @@ class Cart extends StatelessWidget {
   }
 
   void showSnackBar(BuildContext context, MediaQueryData mq) {
+    Navigator.of(context).pop();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         duration: const Duration(seconds: 3),
@@ -107,6 +126,7 @@ class Cart extends StatelessWidget {
 
   void showAlertDialog(BuildContext context, BillController billController,
       UserController userController) {
+    Navigator.of(context).pop();
     showDialog(
       context: context,
       builder: (context) {

@@ -32,7 +32,7 @@ class BillCard extends StatelessWidget {
       ),
       height: mq.size.height * 0.25,
       decoration: BoxDecoration(
-        color: status == "In Progrecess" ? Colors.white : Colors.grey,
+        color: status == "In Progrecess" ? Colors.white : Colors.red.shade500,
         boxShadow: const [
           BoxShadow(color: Colors.black, blurRadius: 3),
         ],
@@ -82,7 +82,7 @@ class BillCard extends StatelessWidget {
                   style: Theme.of(context).textTheme.headline2,
                 ),
                 TextSpan(
-                  text: "$totalprice JD",
+                  text: "${totalprice.toStringAsFixed(2)} JD",
                   style: Theme.of(context).textTheme.headline1,
                 ),
               ],

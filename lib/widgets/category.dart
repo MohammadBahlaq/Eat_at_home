@@ -20,11 +20,8 @@ class Category extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-        providers: [
-          ChangeNotifierProvider(create: (context) => ProductController()),
-          //ChangeNotifierProvider(create: (context) => CartController()),
-        ],
+    return ChangeNotifierProvider(
+        create: (context) => ProductController(),
         builder: (context, chilld) {
           final CartController cartController = context.read<CartController>();
           final ProductController productController =
@@ -54,20 +51,16 @@ class Category extends StatelessWidget {
                                     builder: (context) {
                                       return CountDialog(
                                         onIncrement: () {
-                                          context
-                                              .read<CartController>()
-                                              .increment();
+                                          cartController.increment();
                                         },
                                         onDecrement: () {
-                                          context
-                                              .read<CartController>()
-                                              .decrement();
+                                          cartController.decrement();
                                         },
-                                        onConfirm: () {
+                                        onConfirm: () async {
                                           Navigator.of(context).pop();
                                           print(
                                               "User id add ${userController.userInfo!.id}");
-                                          cartController.addToCart(
+                                          await cartController.addToCart(
                                             CartP(
                                               userId:
                                                   userController.userInfo!.id,

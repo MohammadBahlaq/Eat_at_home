@@ -19,7 +19,10 @@ class CartBuilder extends StatelessWidget {
       selector: (p0, p1) => p1.cart.length,
       builder: (context, value, child) {
         return ListView.builder(
-          padding: EdgeInsets.only(bottom: mq.size.height * 0.07),
+          padding: EdgeInsets.only(
+            bottom: mq.size.height * 0.07,
+            top: mq.size.height * 0.014,
+          ),
           itemCount: cartController.cart.length,
           itemBuilder: (BuildContext context, i) {
             return CartCard(
@@ -28,8 +31,7 @@ class CartBuilder extends StatelessWidget {
               name: cartController.cart[i].name,
               index: i,
               onClick: () {
-                cartController.deleteFormCart(cartController.cart[i]);
-                print(i);
+                //cartController.deleteFormCart(cartController.cart[i]);
               },
               onIncrement: () {
                 cartController.incrementCount(cartController.cart[i]);

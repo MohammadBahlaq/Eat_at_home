@@ -30,11 +30,15 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => BillController())
       ],
       builder: (context, child) {
+        final UserController userController = context.read<UserController>();
+        final CartController cartController = context.read<CartController>();
+
         if (prefs!.getString("email") != null) {
-          context
-              .read<UserController>()
-              .login(prefs!.getString("email")!, prefs!.getString("password")!);
+          userController.login(
+              prefs!.getString("email")!, prefs!.getString("password")!);
+          cartController.getCart(prefs!.getInt("id")!);
         }
+
         return MaterialApp(
           title: 'Flutter Demo',
           debugShowCheckedModeBanner: false,
@@ -42,19 +46,19 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.blue,
             primaryColor: Colors.blueAccent,
             inputDecorationTheme: const InputDecorationTheme(),
-            textTheme: TextTheme(
-              headline1: const TextStyle(
+            textTheme: const TextTheme(
+              headline1: TextStyle(
                 color: Colors.grey,
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
               ),
-              headline2: const TextStyle(
+              headline2: TextStyle(
                 color: Colors.black,
                 fontSize: 20,
                 fontWeight: FontWeight.w500,
               ),
               headline3: TextStyle(
-                color: Colors.brown.shade300,
+                color: Colors.brown,
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
               ),
