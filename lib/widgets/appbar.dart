@@ -25,24 +25,23 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         Row(
           children: [
-            Padding(
-              padding: EdgeInsets.only(right: mq.size.width * 0.04),
-              child: InkWell(
-                child: SvgPicture.asset(
-                  "images/Bill Icon.svg",
-                  color: Colors.white,
-                ),
-                onTap: () async {
-                  if (userController.isLogin) {
-                    Navigator.pushNamed(context, "bill");
-                    billController.setLoading(0);
-                    await billController.getBill(userController.userInfo!.id);
-                    billController.setLoading(1);
-                  } else {
-                    Navigator.pushNamed(context, "login");
-                  }
-                },
+            InkWell(
+              child: SvgPicture.asset(
+                "images/orders.svg",
+                width: mq.size.width * 0.067,
+                height: mq.size.height * 0.035,
+                color: Colors.white,
               ),
+              onTap: () async {
+                if (userController.isLogin) {
+                  Navigator.pushNamed(context, "bill");
+                  billController.setLoading(0);
+                  await billController.getBill(userController.userInfo!.id);
+                  billController.setLoading(1);
+                } else {
+                  Navigator.pushNamed(context, "login");
+                }
+              },
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
