@@ -10,6 +10,7 @@ class BillDetailes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final BillController billController = context.read<BillController>();
+    final mq = MediaQuery.of(context);
     return Scaffold(
       appBar: AppBar(title: const Text("ORDER DETAILES"), centerTitle: true),
       body: Selector<BillController, int>(
@@ -18,6 +19,7 @@ class BillDetailes extends StatelessWidget {
           return mealsLength == 0
               ? const Center(child: CircularProgressIndicator())
               : ListView.builder(
+                  padding: EdgeInsets.only(top: mq.size.height * 0.014),
                   itemCount: mealsLength,
                   itemBuilder: (context, i) {
                     return MealCard(

@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:eat_at_home/controller/user_controller.dart';
 import 'package:eat_at_home/widgets/appbar.dart';
 import 'package:eat_at_home/widgets/login_signup_btn.dart';
@@ -60,22 +61,25 @@ class Home extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Container(
-                              margin:
-                                  EdgeInsets.only(right: mq.size.width * 0.025),
+                            Badge(
                               alignment: Alignment.center,
-                              height: mq.size.height * 0.033,
-                              width: mq.size.width * 0.064,
-                              decoration: BoxDecoration(
-                                color: Colors.blue.shade200,
-                                borderRadius: BorderRadius.circular(4),
+                              shape: BadgeShape.square,
+                              padding: EdgeInsets.symmetric(
+                                horizontal: mq.size.width * 0.013,
+                                vertical: mq.size.height * 0.003,
                               ),
-                              child: Text(
+                              borderRadius: BorderRadius.circular(4),
+                              badgeColor: Colors.blue.shade200,
+                              badgeContent: Text(
                                 "${cartController.cart.length} ",
+                                textAlign: TextAlign.center,
                                 style: const TextStyle(
-                                    fontSize: 18, color: Colors.white),
+                                  fontSize: 18,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
+                            SizedBox(width: mq.size.width * 0.015),
                             const Text(
                               "See your basket",
                               style: TextStyle(fontSize: 18),

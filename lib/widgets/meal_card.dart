@@ -25,11 +25,14 @@ class MealCard extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Image.network(
-            image,
-            height: mq.size.height / 5.5,
-            width: mq.size.width / 2.5,
-            fit: category == "Beverages" ? BoxFit.contain : BoxFit.fill,
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Image.network(
+              image,
+              height: mq.size.height * 0.13,
+              width: mq.size.width * 0.28,
+              fit: category == "Beverages" ? BoxFit.contain : BoxFit.fill,
+            ),
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,

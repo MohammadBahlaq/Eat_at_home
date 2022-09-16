@@ -39,7 +39,7 @@ class ProductCard extends StatelessWidget {
             ),
           ),
           Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
                 width: mq.size.width / 3,
@@ -53,8 +53,6 @@ class ProductCard extends StatelessWidget {
               Text(
                 "$price JD",
                 style: const TextStyle(fontSize: 18),
-                maxLines: 4,
-                overflow: TextOverflow.ellipsis,
               ),
             ],
           ),

@@ -22,17 +22,21 @@ class BillBuilder extends StatelessWidget {
         padding: EdgeInsets.only(top: mq.size.height * 0.02),
         itemCount: billLength,
         itemBuilder: (context, i) {
-          return BillCard(
-            id: billController.bills[i].id!,
-            onClick: () async {
-              Navigator.of(context).pushNamed("detailes");
-              await billController.getItems(billController.bills[i].id!);
-            },
-            date: billController.bills[i].date,
-            time: billController.bills[i].time,
-            totalprice: billController.bills[i].totalprice,
-            status:
-                billController.bills[i].status == 1 ? "In Progrecess" : "Done",
+          return Selector<BillController, int>(
+            selector: (p0, p1) => p1.bills[i].status,
+            builder: (context, value, child) => BillCard(
+              id: billController.bills[i].id!,
+              onClick: () async {
+                Navigator.of(context).pushNamed("detailes");
+                await billController.getItems(billController.bills[i].id!);
+              },
+              date: billController.bills[i].date,
+              time: billController.bills[i].time,
+              totalprice: billController.bills[i].totalprice,
+              status: billController.bills[i].status == 1
+                  ? "In Progrecess"
+                  : "Done",
+            ),
           );
         },
       ),

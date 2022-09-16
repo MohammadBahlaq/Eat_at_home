@@ -54,27 +54,27 @@ class Cart extends StatelessWidget {
                 },
               ),
               onClick: () async {
-                showDialog(
-                  context: context,
-                  builder: (context) {
-                    return AlertDialog(
-                      content: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const Text("Loading...",
-                              style: TextStyle(fontSize: 18)),
-                          SizedBox(
-                              height: MediaQuery.of(context).size.height / 25),
-                          const CircularProgressIndicator(),
-                        ],
-                      ),
-                    );
-                  },
-                );
-
                 DateTime date = DateTime.now();
 
                 if (cartController.cart.isNotEmpty) {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const Text("Loading...",
+                                style: TextStyle(fontSize: 18)),
+                            SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height / 25),
+                            const CircularProgressIndicator(),
+                          ],
+                        ),
+                      );
+                    },
+                  );
                   await cartController.confirm(
                             BillP(
                               date: "${date.day}/${date.month}/${date.year}",
