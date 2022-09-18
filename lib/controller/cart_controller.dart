@@ -82,12 +82,39 @@ class CartController with ChangeNotifier {
     notifyListeners();
   }
 
-  void isExisting(CartP product, int index) {
-    if (cart.contains(product)) {
-      cart[index].count += count;
+  Future<void> isExisting(CartP product) async {
+    int index = contains(product.name);
+
+    if (index != -1) {
+      String url = "${Data.apiPath}update_count_cart.php";
+
+      var response = await http.post(
+        Uri.parse(url),
+        body: {
+          "count": "${cart[index].count + product.count}",
+          "id": "${cart[index].transId}",
+          "subprice": "${cart[index].subTotalPrice + product.subTotalPrice}",
+        },
+      );
+      if (int.parse(response.body) == 1) {
+        cart[index].count += count;
+        countAll += count;
+        totalPrice += product.subTotalPrice;
+        count = 1;
+        notifyListeners();
+      }
     } else {
-      //addToCart(product);
+      await addToCart(product);
     }
+  }
+
+  int contains(String mealName) {
+    for (int index = 0; index < cart.length; index++) {
+      if (mealName == cart[index].name) {
+        return index;
+      }
+    }
+    return -1;
   }
 
   Future<int> confirm(BillP bill, List<CartP> products) async {

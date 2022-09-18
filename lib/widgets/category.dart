@@ -59,7 +59,7 @@ class Category extends StatelessWidget {
                                         onConfirm: () async {
                                           Navigator.of(context).pop();
 
-                                          await cartController.addToCart(
+                                          await cartController.isExisting(
                                             CartP(
                                               userId:
                                                   userController.userInfo!.id,
