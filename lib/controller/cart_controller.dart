@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print
-
 import 'dart:convert';
 import 'package:eat_at_home/controller/data_controller.dart';
 import 'package:eat_at_home/model/Cart.dart';
@@ -11,6 +9,7 @@ class CartController with ChangeNotifier {
   List<CartP> cart = [];
   double totalPrice = 0;
   int count = 1;
+  int countAll = 0;
   int loading = 0;
 
   Future<void> setLoading(int value) async {
@@ -20,6 +19,7 @@ class CartController with ChangeNotifier {
 
   Future<void> addToCart(CartP product) async {
     totalPrice += product.subTotalPrice;
+    countAll += count;
     String url = "${Data.apiPath}insert_cart.php";
     var response = await http.post(
       Uri.parse(url),
@@ -30,7 +30,7 @@ class CartController with ChangeNotifier {
         "subprice": "${product.subTotalPrice}",
       },
     );
-    //print(jsonDecode(response.body));
+
     if (jsonDecode(response.body) == 1) {
       cart.add(product);
     }
@@ -49,6 +49,7 @@ class CartController with ChangeNotifier {
     );
 
     if (jsonDecode(response.body) == 1) {
+      countAll -= product.count;
       cart.remove(product);
       notifyListeners();
     }
@@ -71,13 +72,22 @@ class CartController with ChangeNotifier {
           category: element['category'],
           img: element['photo'],
           count: element['count'],
-          subTotalPrice: element['subPrice'],
+          subTotalPrice: element['subPrice'].toDouble(),
         ),
       );
     }
 
     calculateTotalPrice();
+    calculateAllCount();
     notifyListeners();
+  }
+
+  void isExisting(CartP product, int index) {
+    if (cart.contains(product)) {
+      cart[index].count += count;
+    } else {
+      //addToCart(product);
+    }
   }
 
   Future<int> confirm(BillP bill, List<CartP> products) async {
@@ -118,19 +128,51 @@ class CartController with ChangeNotifier {
     notifyListeners();
   }
 
-  void incrementCount(CartP product) {
-    product.count++;
-    product.subTotalPrice += product.price;
-    totalPrice += product.price;
-    notifyListeners();
+  void calculateAllCount() {
+    countAll = 0;
+    for (var element in cart) {
+      countAll += element.count;
+    }
   }
 
-  void decrementCount(CartP product) {
-    if (product.count > 1) {
-      product.count--;
-      product.subTotalPrice -= product.price;
-      totalPrice -= product.price;
+  Future<void> incrementCount(CartP product) async {
+    String url = "${Data.apiPath}update_count_cart.php";
+
+    var response = await http.post(
+      Uri.parse(url),
+      body: {
+        "count": "${product.count + 1}",
+        "id": "${product.transId}",
+        "subprice": "${product.price * (product.count + 1)}"
+      },
+    );
+    if (int.parse(response.body) == 1) {
+      product.count++;
+      product.subTotalPrice += product.price;
+      totalPrice += product.price;
+      countAll++;
       notifyListeners();
+    }
+  }
+
+  Future<void> decrementCount(CartP product) async {
+    if (product.count > 1) {
+      String url = "${Data.apiPath}update_count_cart.php";
+      var response = await http.post(
+        Uri.parse(url),
+        body: {
+          "count": "${product.count - 1}",
+          "id": "${product.transId}",
+          "subprice": "${product.price * (product.count - 1)}"
+        },
+      );
+      if (int.parse(response.body) == 1) {
+        product.count--;
+        countAll--;
+        product.subTotalPrice -= product.price;
+        totalPrice -= product.price;
+        notifyListeners();
+      }
     } else {
       deleteFormCart(product);
     }

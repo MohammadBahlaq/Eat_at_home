@@ -58,8 +58,7 @@ class Category extends StatelessWidget {
                                         },
                                         onConfirm: () async {
                                           Navigator.of(context).pop();
-                                          print(
-                                              "User id add ${userController.userInfo!.id}");
+
                                           await cartController.addToCart(
                                             CartP(
                                               userId:

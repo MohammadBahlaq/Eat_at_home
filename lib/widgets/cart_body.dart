@@ -33,11 +33,11 @@ class CartBuilder extends StatelessWidget {
               onClick: () {
                 //cartController.deleteFormCart(cartController.cart[i]);
               },
-              onIncrement: () {
-                cartController.incrementCount(cartController.cart[i]);
+              onIncrement: () async {
+                await cartController.incrementCount(cartController.cart[i]);
               },
-              onDecrement: () {
-                cartController.decrementCount(cartController.cart[i]);
+              onDecrement: () async {
+                await cartController.decrementCount(cartController.cart[i]);
               },
             );
           },

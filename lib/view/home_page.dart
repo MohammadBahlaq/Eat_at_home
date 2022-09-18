@@ -1,5 +1,6 @@
 import 'package:badges/badges.dart';
 import 'package:eat_at_home/controller/user_controller.dart';
+import 'package:eat_at_home/view/cart_page.dart';
 import 'package:eat_at_home/widgets/appbar.dart';
 import 'package:eat_at_home/widgets/login_signup_btn.dart';
 import 'package:flutter/material.dart';
@@ -50,7 +51,7 @@ class Home extends StatelessWidget {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.only(bottom: 8),
+              padding: EdgeInsets.only(bottom: mq.size.height * 0.011),
               child: CustomButton(
                 text: Selector<CartController, double>(
                   selector: (context, p1) => p1.totalPrice,
@@ -70,13 +71,18 @@ class Home extends StatelessWidget {
                               ),
                               borderRadius: BorderRadius.circular(4),
                               badgeColor: Colors.blue.shade200,
-                              badgeContent: Text(
-                                "${cartController.cart.length} ",
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.white,
-                                ),
+                              badgeContent: Selector<CartController, int>(
+                                selector: (p0, p1) => p1.countAll,
+                                builder: (context, countAll, child) {
+                                  return Text(
+                                    "$countAll ",
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(
+                                      fontSize: 18,
+                                      color: Colors.white,
+                                    ),
+                                  );
+                                },
                               ),
                             ),
                             SizedBox(width: mq.size.width * 0.015),
