@@ -32,8 +32,8 @@ class Home extends StatelessWidget {
               Tab(icon: Icon(Icons.food_bank, size: 29), child: Text("Salad")),
               Tab(
                   icon: Icon(Icons.emoji_food_beverage, size: 29),
-                  child: Text("Beverages")),
-              Tab(icon: Icon(Icons.add, size: 29), child: Text("Extra")),
+                  child: Text("Drinks")),
+              Tab(icon: Icon(Icons.add, size: 29), child: Text("Other")),
             ],
             isScrollable: true,
           ),
@@ -46,71 +46,68 @@ class Home extends StatelessWidget {
                 Category(category: "Pizza"),
                 Category(category: "Sandwich"),
                 Category(category: "Salad"),
-                Category(category: "Beverages"),
-                Category(category: "Extra"),
+                Category(category: "Drinks"),
+                Category(category: "Other"),
               ],
             ),
-            Padding(
-              padding: EdgeInsets.only(bottom: mq.size.height * 0.011),
-              child: CustomButton(
-                text: Selector<CartController, double>(
-                  selector: (context, p1) => p1.totalPrice,
-                  builder: (context, totalPrice, child) {
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Badge(
-                              alignment: Alignment.center,
-                              shape: BadgeShape.square,
-                              padding: EdgeInsets.symmetric(
-                                horizontal: mq.size.width * 0.013,
-                                vertical: mq.size.height * 0.003,
-                              ),
-                              borderRadius: BorderRadius.circular(4),
-                              badgeColor: Colors.blue.shade200,
-                              badgeContent: Selector<CartController, int>(
-                                selector: (p0, p1) => p1.countAll,
-                                builder: (context, countAll, child) {
-                                  return Text(
-                                    "$countAll ",
-                                    textAlign: TextAlign.center,
-                                    style: const TextStyle(
-                                      fontSize: 18,
-                                      color: Colors.white,
-                                    ),
-                                  );
-                                },
-                              ),
+            CustomButton(
+              text: Selector<CartController, double>(
+                selector: (context, p1) => p1.totalPrice,
+                builder: (context, totalPrice, child) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Badge(
+                            alignment: Alignment.center,
+                            shape: BadgeShape.square,
+                            padding: EdgeInsets.symmetric(
+                              horizontal: mq.size.width * 0.013,
+                              vertical: mq.size.height * 0.003,
                             ),
-                            SizedBox(width: mq.size.width * 0.015),
-                            const Text(
-                              "See your basket",
-                              style: TextStyle(fontSize: 18),
+                            borderRadius: BorderRadius.circular(4),
+                            badgeColor: Colors.blue.shade200,
+                            badgeContent: Selector<CartController, int>(
+                              selector: (p0, p1) => p1.countAll,
+                              builder: (context, countAll, child) {
+                                return Text(
+                                  "$countAll ",
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                    fontSize: 18,
+                                    color: Colors.white,
+                                  ),
+                                );
+                              },
                             ),
-                          ],
-                        ),
-                        Text(
-                          "${totalPrice.toStringAsFixed(2)} JD",
-                          style: const TextStyle(fontSize: 18),
-                        ),
-                      ],
-                    );
-                  },
-                ),
-                onClick: () async {
-                  if (userController.isLogin) {
-                    Navigator.pushNamed(context, "cart");
-                    cartController.setLoading(0);
-                    await cartController.getCart(userController.userInfo!.id);
-                    cartController.setLoading(1);
-                  } else {
-                    Navigator.pushNamed(context, "login");
-                  }
+                          ),
+                          SizedBox(width: mq.size.width * 0.015),
+                          const Text(
+                            "See your basket",
+                            style: TextStyle(fontSize: 18),
+                          ),
+                        ],
+                      ),
+                      Text(
+                        "${totalPrice.toStringAsFixed(2)} JD",
+                        style: const TextStyle(fontSize: 18),
+                      ),
+                    ],
+                  );
                 },
               ),
+              onClick: () async {
+                if (userController.isLogin) {
+                  Navigator.pushNamed(context, "cart");
+                  cartController.setLoading(0);
+                  await cartController.getCart(userController.userInfo!.id);
+                  cartController.setLoading(1);
+                } else {
+                  Navigator.pushNamed(context, "login");
+                }
+              },
             )
           ],
         ),

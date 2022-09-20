@@ -5,14 +5,16 @@ import 'package:provider/provider.dart';
 import '../controller/bill_controller.dart';
 
 class BillDetailes extends StatelessWidget {
-  const BillDetailes({super.key});
+  const BillDetailes({super.key, this.orderNO});
+
+  final int? orderNO;
 
   @override
   Widget build(BuildContext context) {
     final BillController billController = context.read<BillController>();
     final mq = MediaQuery.of(context);
     return Scaffold(
-      appBar: AppBar(title: const Text("ORDER DETAILES"), centerTitle: true),
+      appBar: AppBar(title: Text("ORDER #$orderNO"), centerTitle: true),
       body: Selector<BillController, int>(
         selector: (p0, p1) => p1.meals.length,
         builder: (context, mealsLength, child) {

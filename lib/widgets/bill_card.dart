@@ -32,7 +32,7 @@ class BillCard extends StatelessWidget {
       ),
       height: mq.size.height * 0.25,
       decoration: BoxDecoration(
-        color: status == "In Progrecess" ? Colors.white : Colors.red.shade500,
+        color: status == "Done" ? Colors.white : Colors.blue.shade300,
         boxShadow: const [
           BoxShadow(color: Colors.black, blurRadius: 3),
         ],

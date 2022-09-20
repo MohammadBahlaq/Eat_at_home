@@ -16,8 +16,11 @@ class Bill extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Your Bill"),
+        title: const Text("Your Bills"),
         centerTitle: true,
+        //foregroundColor: Theme.of(context).primaryColor,
+        //backgroundColor: Colors.transparent,
+        //elevation: 0,
       ),
       body: RefreshIndicator(
         onRefresh: () async {

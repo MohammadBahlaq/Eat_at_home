@@ -1,7 +1,4 @@
-// ignore_for_file: avoid_print
-
 import 'dart:convert';
-
 import 'package:eat_at_home/controller/data_controller.dart';
 import 'package:eat_at_home/model/product.dart';
 import 'package:flutter/cupertino.dart';
@@ -22,16 +19,12 @@ class ProductController extends ChangeNotifier {
         Product(
           id: element['Meal_id'],
           name: element['name'],
-          price: element['price'],
+          price: element['price'].toDouble(),
           category: element['category'],
           photo: element['photo'],
         ),
       );
-      //print(product);
     }
     notifyListeners();
-    // for (Product element in data) {
-    //   if (element.category == category) product.add(element);
-    // }
   }
 }

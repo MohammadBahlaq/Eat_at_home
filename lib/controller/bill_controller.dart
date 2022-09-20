@@ -29,7 +29,7 @@ class BillController with ChangeNotifier {
           date: element['Date'],
           time: element['Time'],
           status: element['Status'],
-          totalprice: element['total_price'],
+          totalprice: element['total_price'].toDouble(),
           userid: element['user_id'],
           name: element['name'],
         ),
@@ -52,7 +52,7 @@ class BillController with ChangeNotifier {
           category: meal['category'],
           image: meal['photo'],
           count: meal['count'],
-          subPrice: meal['sub_price'],
+          subPrice: meal['sub_price'].toDouble(),
         ),
       );
     }

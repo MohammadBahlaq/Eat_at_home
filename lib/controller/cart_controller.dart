@@ -220,6 +220,7 @@ class CartController with ChangeNotifier {
   void logoutCart() {
     cart.clear();
     totalPrice = 0;
+    countAll = 0;
     notifyListeners();
   }
 }

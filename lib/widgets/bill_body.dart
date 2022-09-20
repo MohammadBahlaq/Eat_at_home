@@ -1,4 +1,5 @@
 import 'package:eat_at_home/controller/bill_controller.dart';
+import 'package:eat_at_home/view/bill_detailes.dart';
 import 'package:eat_at_home/widgets/bill_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -27,7 +28,10 @@ class BillBuilder extends StatelessWidget {
             builder: (context, value, child) => BillCard(
               id: billController.bills[i].id!,
               onClick: () async {
-                Navigator.of(context).pushNamed("detailes");
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) =>
+                      BillDetailes(orderNO: billController.bills[i].id!),
+                ));
                 await billController.getItems(billController.bills[i].id!);
               },
               date: billController.bills[i].date,

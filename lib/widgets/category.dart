@@ -27,6 +27,7 @@ class Category extends StatelessWidget {
           final ProductController productController =
               context.read<ProductController>();
           final UserController userController = context.read<UserController>();
+          final mq = MediaQuery.of(context);
 
           productController.getProduct(category);
 
@@ -35,8 +36,34 @@ class Category extends StatelessWidget {
             builder: (context, length, child) {
               return length == 0
                   ? const Center(child: CircularProgressIndicator())
-                  : ListView.builder(
+                  : ListView.separated(
+                      padding: EdgeInsets.only(
+                        bottom: mq.size.height * 0.07,
+                        top: mq.size.height * 0.013,
+                        right: mq.size.width * 0.025,
+                        left: mq.size.width * 0.025,
+                      ),
                       itemCount: length,
+                      separatorBuilder: (context, i) {
+                        if (i == 2 && category == "Pizza") {
+                          return const Divider(
+                            thickness: 2,
+                            color: Colors.blue,
+                          );
+                        } else if (i == 5 && category == "Pizza") {
+                          return const Divider(
+                            color: Colors.red,
+                            thickness: 2,
+                          );
+                        } else if (i == 8 && category == "Pizza") {
+                          return const Divider(
+                            color: Colors.green,
+                            thickness: 2,
+                          );
+                        } else {
+                          return SizedBox();
+                        }
+                      },
                       itemBuilder: (BuildContext context, i) {
                         return ProductCard(
                           image:

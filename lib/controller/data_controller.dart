@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../main.dart';
@@ -27,8 +25,5 @@ class Data with ChangeNotifier {
     prefs!.setString("email", email);
     prefs!.setString("password", password);
     prefs!.setInt("id", id);
-
-    print(prefs!.get("email"));
-    print(prefs!.get("password"));
   }
 }

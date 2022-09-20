@@ -22,10 +22,6 @@ class ProductCard extends StatelessWidget {
     final mq = MediaQuery.of(context);
     return Container(
       margin: EdgeInsets.only(bottom: mq.size.height / 50),
-      padding: EdgeInsets.symmetric(
-        horizontal: mq.size.width * 0.025,
-        vertical: mq.size.height * 0.013,
-      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -35,7 +31,7 @@ class ProductCard extends StatelessWidget {
               image,
               height: mq.size.height * 0.13,
               width: mq.size.width * 0.28,
-              fit: category == "Beverages" ? BoxFit.contain : BoxFit.fill,
+              fit: category == "Drinks" ? BoxFit.contain : BoxFit.fill,
             ),
           ),
           Column(
