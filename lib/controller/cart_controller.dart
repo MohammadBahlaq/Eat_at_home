@@ -202,6 +202,7 @@ class CartController with ChangeNotifier {
       }
     } else {
       deleteFormCart(product);
+      notifyListeners();
     }
   }
 

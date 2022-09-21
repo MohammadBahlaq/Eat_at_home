@@ -46,23 +46,23 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.blue,
             primaryColor: Colors.blueAccent,
             inputDecorationTheme: const InputDecorationTheme(),
-            textTheme: const TextTheme(
+            textTheme: TextTheme(
               headline1: TextStyle(
-                color: Colors.grey,
+                color: Colors.grey.shade600,
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
               ),
-              headline2: TextStyle(
+              headline2: const TextStyle(
                 color: Colors.black,
                 fontSize: 20,
                 fontWeight: FontWeight.w500,
               ),
-              headline3: TextStyle(
+              headline3: const TextStyle(
                 color: Colors.brown,
                 fontSize: 18,
                 fontWeight: FontWeight.w500,
               ),
-              headline4: TextStyle(
+              headline4: const TextStyle(
                 color: Colors.grey,
                 fontSize: 25,
                 fontWeight: FontWeight.w500,

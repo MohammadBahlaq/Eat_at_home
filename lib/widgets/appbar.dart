@@ -43,35 +43,38 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 }
               },
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Badge(
-                badgeContent: Selector<CartController, int>(
-                  selector: (context, cartC) => cartC.countAll,
-                  builder: ((context, length, child) {
-                    return Text(
-                      "$length",
-                      style: const TextStyle(color: Colors.white),
-                    );
-                  }),
-                ),
-                animationType: BadgeAnimationType.slide,
-                position: BadgePosition.topEnd(end: 0, top: -4),
-                child: IconButton(
-                  icon: const Icon(Icons.shopping_cart),
-                  iconSize: 25,
-                  onPressed: () async {
-                    if (userController.isLogin) {
-                      Navigator.pushNamed(context, "cart");
-                      cartController.setLoading(0);
-                      await cartController.getCart(userController.userInfo!.id);
-                      cartController.setLoading(1);
-                    } else {
-                      Navigator.pushNamed(context, "login");
-                    }
-                  },
+            InkWell(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Badge(
+                  padding: const EdgeInsets.all(3),
+                  badgeContent: Selector<CartController, int>(
+                    selector: (context, cartC) => cartC.countAll,
+                    builder: ((context, length, child) {
+                      return Text(
+                        "$length",
+                        style: const TextStyle(color: Colors.white),
+                      );
+                    }),
+                  ),
+                  animationType: BadgeAnimationType.slide,
+                  //position: BadgePosition.topEnd(end: 0, top: -4),
+                  child: const Icon(
+                    Icons.shopping_cart,
+                    size: 25,
+                  ),
                 ),
               ),
+              onTap: () async {
+                if (userController.isLogin) {
+                  Navigator.pushNamed(context, "cart");
+                  cartController.setLoading(0);
+                  await cartController.getCart(userController.userInfo!.id);
+                  cartController.setLoading(1);
+                } else {
+                  Navigator.pushNamed(context, "login");
+                }
+              },
             ),
             IconButton(
               onPressed: () {

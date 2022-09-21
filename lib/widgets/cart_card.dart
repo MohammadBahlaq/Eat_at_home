@@ -12,7 +12,6 @@ class CartCard extends StatelessWidget {
     required this.category,
     required this.name,
     required this.index,
-    required this.onClick,
     required this.onIncrement,
     required this.onDecrement,
   }) : super(key: key);
@@ -21,7 +20,7 @@ class CartCard extends StatelessWidget {
   final String category;
   final String name;
   final int index;
-  final void Function() onClick;
+
   final void Function() onIncrement;
   final void Function() onDecrement;
 

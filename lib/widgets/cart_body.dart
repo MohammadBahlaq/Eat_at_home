@@ -18,30 +18,33 @@ class CartBuilder extends StatelessWidget {
     return Selector<CartController, int>(
       selector: (p0, p1) => p1.cart.length,
       builder: (context, value, child) {
-        return ListView.builder(
-          padding: EdgeInsets.only(
-            bottom: mq.size.height * 0.07,
-            top: mq.size.height * 0.014,
-          ),
-          itemCount: cartController.cart.length,
-          itemBuilder: (BuildContext context, i) {
-            return CartCard(
-              image: "${Data.imgPath}${cartController.cart[i].img}",
-              category: cartController.cart[i].category,
-              name: cartController.cart[i].name,
-              index: i,
-              onClick: () {
-                //cartController.deleteFormCart(cartController.cart[i]);
-              },
-              onIncrement: () async {
-                await cartController.incrementCount(cartController.cart[i]);
-              },
-              onDecrement: () async {
-                await cartController.decrementCount(cartController.cart[i]);
-              },
-            );
-          },
-        );
+        return value == 0
+            ? const Center(
+                child: Text("You don't have any item",
+                    style: TextStyle(fontSize: 18)))
+            : ListView.builder(
+                padding: EdgeInsets.only(
+                  bottom: mq.size.height * 0.07,
+                  top: mq.size.height * 0.014,
+                ),
+                itemCount: cartController.cart.length,
+                itemBuilder: (BuildContext context, i) {
+                  return CartCard(
+                    image: "${Data.imgPath}${cartController.cart[i].img}",
+                    category: cartController.cart[i].category,
+                    name: cartController.cart[i].name,
+                    index: i,
+                    onIncrement: () async {
+                      await cartController
+                          .incrementCount(cartController.cart[i]);
+                    },
+                    onDecrement: () async {
+                      await cartController
+                          .decrementCount(cartController.cart[i]);
+                    },
+                  );
+                },
+              );
       },
     );
   }

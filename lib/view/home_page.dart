@@ -31,7 +31,7 @@ class Home extends StatelessWidget {
                   child: Text("Sandwich")),
               Tab(icon: Icon(Icons.food_bank, size: 29), child: Text("Salad")),
               Tab(
-                  icon: Icon(Icons.emoji_food_beverage, size: 29),
+                  icon: Icon(Icons.local_drink, size: 29),
                   child: Text("Drinks")),
               Tab(icon: Icon(Icons.add, size: 29), child: Text("Other")),
             ],

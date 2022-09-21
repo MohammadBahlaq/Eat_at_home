@@ -9,57 +9,69 @@ class ProductCard extends StatelessWidget {
     required this.name,
     required this.price,
     required this.onClick,
+    required this.index,
   }) : super(key: key);
 
   final String image;
   final String category;
   final String name;
   final double price;
+  final int index;
   final void Function() onClick;
 
   @override
   Widget build(BuildContext context) {
     final mq = MediaQuery.of(context);
-    return Container(
-      margin: EdgeInsets.only(bottom: mq.size.height / 50),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(10),
-            child: Image.network(
-              image,
-              height: mq.size.height * 0.13,
-              width: mq.size.width * 0.28,
-              fit: category == "Drinks" ? BoxFit.contain : BoxFit.fill,
-            ),
+    return Column(
+      children: [
+        if (index == 0 && category == "Pizza")
+          Text(
+            "Large Pizza",
+            textAlign: TextAlign.center,
+            style: Theme.of(context).textTheme.headline4,
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+        Container(
+          margin: EdgeInsets.only(bottom: mq.size.height / 50),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              SizedBox(
-                width: mq.size.width / 3,
-                child: Text(
-                  name,
-                  style: const TextStyle(fontSize: 18),
-                  softWrap: true,
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.network(
+                  image,
+                  height: mq.size.height * 0.13,
+                  width: mq.size.width * 0.28,
+                  fit: category == "Drinks" ? BoxFit.contain : BoxFit.fill,
                 ),
               ),
-              SizedBox(height: mq.size.height / 50),
-              Text(
-                "$price JD",
-                style: const TextStyle(fontSize: 18),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: mq.size.width / 3,
+                    child: Text(
+                      name,
+                      style: const TextStyle(fontSize: 18),
+                      softWrap: true,
+                    ),
+                  ),
+                  SizedBox(height: mq.size.height / 50),
+                  Text(
+                    "$price JD",
+                    style: const TextStyle(fontSize: 18),
+                  ),
+                ],
+              ),
+              CustonButton(
+                icon: const Icon(Icons.add),
+                color: Theme.of(context).primaryColor,
+                padding: 0,
+                onClick: onClick,
               ),
             ],
           ),
-          CustonButton(
-            icon: const Icon(Icons.add),
-            color: Theme.of(context).primaryColor,
-            padding: 0,
-            onClick: onClick,
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

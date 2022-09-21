@@ -37,12 +37,12 @@ class Category extends StatelessWidget {
                   : Column(
                       //mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        if (category == "Pizza")
-                          Text(
-                            "Large Pizza",
-                            textAlign: TextAlign.center,
-                            style: Theme.of(context).textTheme.headline4,
-                          ),
+                        // if (category == "Pizza")
+                        // Text(
+                        //   "Large Pizza",
+                        //   textAlign: TextAlign.center,
+                        //   style: Theme.of(context).textTheme.headline4,
+                        // ),
                         SizedBox(
                           height: mq.size.height * 0.7582,
                           child: ListView.separated(
@@ -73,6 +73,7 @@ class Category extends StatelessWidget {
                             },
                             itemBuilder: (BuildContext context, i) {
                               return ProductCard(
+                                index: i,
                                 image:
                                     "${Data.imgPath}${productController.product[i].photo}",
                                 category: category,
@@ -132,98 +133,3 @@ class Category extends StatelessWidget {
         });
   }
 }
-/*
- Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        if (category == "Pizza")
-                          Text(
-                            "Large Pizza",
-                            textAlign: TextAlign.center,
-                            style: Theme.of(context).textTheme.headline4,
-                          ),
-                        SizedBox(
-                          height: mq.size.height * 0.75,
-                          child: ListView.separated(
-                            //physics: NeverScrollableScrollPhysics(),
-                            padding: EdgeInsets.only(
-                              bottom: mq.size.height * 0.075,
-                              top: mq.size.height * 0.013,
-                              right: mq.size.width * 0.025,
-                              left: mq.size.width * 0.025,
-                            ),
-                            itemCount: length,
-                            separatorBuilder: (context, i) {
-                              if (i == 2 && category == "Pizza") {
-                                return Text(
-                                  "Medium Pizza",
-                                  textAlign: TextAlign.center,
-                                  style: Theme.of(context).textTheme.headline4,
-                                );
-                              } else if (i == 5 && category == "Pizza") {
-                                return Text(
-                                  "Small Pizza",
-                                  textAlign: TextAlign.center,
-                                  style: Theme.of(context).textTheme.headline4,
-                                );
-                              } else {
-                                return const SizedBox();
-                              }
-                            },
-                            itemBuilder: (BuildContext context, i) {
-                              return ProductCard(
-                                image:
-                                    "${Data.imgPath}${productController.product[i].photo}",
-                                category: category,
-                                name: productController.product[i].name,
-                                price: productController.product[i].price,
-                                onClick: () {
-                                  userController.isLogin
-                                      ? showDialog(
-                                          context: context,
-                                          builder: (context) {
-                                            return CountDialog(
-                                              onIncrement: () {
-                                                cartController.increment();
-                                              },
-                                              onDecrement: () {
-                                                cartController.decrement();
-                                              },
-                                              onConfirm: () async {
-                                                Navigator.of(context).pop();
-
-                                                await cartController.isExisting(
-                                                  CartP(
-                                                    userId: userController
-                                                        .userInfo!.id,
-                                                    mealId: productController
-                                                        .product[i].id,
-                                                    name: productController
-                                                        .product[i].name,
-                                                    count: cartController.count,
-                                                    price: productController
-                                                        .product[i].price,
-                                                    subTotalPrice:
-                                                        cartController.count *
-                                                            productController
-                                                                .product[i]
-                                                                .price,
-                                                    category: category,
-                                                    img: productController
-                                                        .product[i].photo,
-                                                  ),
-                                                );
-                                              },
-                                            );
-                                          },
-                                        )
-                                      : Navigator.of(context)
-                                          .pushNamed("login");
-                                },
-                              );
-                            },
-                          ),
-                        ),
-                      ],
-                    )
- */
