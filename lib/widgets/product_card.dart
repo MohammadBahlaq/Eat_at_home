@@ -54,7 +54,7 @@ class ProductCard extends StatelessWidget {
           ),
           CustonButton(
             icon: const Icon(Icons.add),
-            color: Colors.black,
+            color: Theme.of(context).primaryColor,
             padding: 0,
             onClick: onClick,
           ),

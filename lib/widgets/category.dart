@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print
-
 import 'package:eat_at_home/controller/cart_controller.dart';
 import 'package:eat_at_home/controller/data_controller.dart';
 import 'package:eat_at_home/controller/product_controller.dart';
@@ -36,87 +34,196 @@ class Category extends StatelessWidget {
             builder: (context, length, child) {
               return length == 0
                   ? const Center(child: CircularProgressIndicator())
-                  : ListView.separated(
-                      padding: EdgeInsets.only(
-                        bottom: mq.size.height * 0.07,
-                        top: mq.size.height * 0.013,
-                        right: mq.size.width * 0.025,
-                        left: mq.size.width * 0.025,
-                      ),
-                      itemCount: length,
-                      separatorBuilder: (context, i) {
-                        if (i == 2 && category == "Pizza") {
-                          return const Divider(
-                            thickness: 2,
-                            color: Colors.blue,
-                          );
-                        } else if (i == 5 && category == "Pizza") {
-                          return const Divider(
-                            color: Colors.red,
-                            thickness: 2,
-                          );
-                        } else if (i == 8 && category == "Pizza") {
-                          return const Divider(
-                            color: Colors.green,
-                            thickness: 2,
-                          );
-                        } else {
-                          return SizedBox();
-                        }
-                      },
-                      itemBuilder: (BuildContext context, i) {
-                        return ProductCard(
-                          image:
-                              "${Data.imgPath}${productController.product[i].photo}",
-                          category: category,
-                          name: productController.product[i].name,
-                          price: productController.product[i].price,
-                          onClick: () {
-                            userController.isLogin
-                                ? showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return CountDialog(
-                                        onIncrement: () {
-                                          cartController.increment();
-                                        },
-                                        onDecrement: () {
-                                          cartController.decrement();
-                                        },
-                                        onConfirm: () async {
-                                          Navigator.of(context).pop();
+                  : Column(
+                      //mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        if (category == "Pizza")
+                          Text(
+                            "Large Pizza",
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context).textTheme.headline4,
+                          ),
+                        SizedBox(
+                          height: mq.size.height * 0.7582,
+                          child: ListView.separated(
+                            //physics: const NeverScrollableScrollPhysics(),
+                            padding: EdgeInsets.only(
+                              bottom: mq.size.height * 0.075,
+                              top: mq.size.height * 0.013,
+                              right: mq.size.width * 0.025,
+                              left: mq.size.width * 0.025,
+                            ),
+                            itemCount: length,
+                            separatorBuilder: (context, i) {
+                              if (i == 2 && category == "Pizza") {
+                                return Text(
+                                  "Medium Pizza",
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context).textTheme.headline4,
+                                );
+                              } else if (i == 5 && category == "Pizza") {
+                                return Text(
+                                  "Small Pizza",
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context).textTheme.headline4,
+                                );
+                              } else {
+                                return const SizedBox();
+                              }
+                            },
+                            itemBuilder: (BuildContext context, i) {
+                              return ProductCard(
+                                image:
+                                    "${Data.imgPath}${productController.product[i].photo}",
+                                category: category,
+                                name: productController.product[i].name,
+                                price: productController.product[i].price,
+                                onClick: () {
+                                  userController.isLogin
+                                      ? showDialog(
+                                          context: context,
+                                          builder: (context) {
+                                            return CountDialog(
+                                              onIncrement: () {
+                                                cartController.increment();
+                                              },
+                                              onDecrement: () {
+                                                cartController.decrement();
+                                              },
+                                              onConfirm: () async {
+                                                Navigator.of(context).pop();
 
-                                          await cartController.isExisting(
-                                            CartP(
-                                              userId:
-                                                  userController.userInfo!.id,
-                                              mealId: productController
-                                                  .product[i].id,
-                                              name: productController
-                                                  .product[i].name,
-                                              count: cartController.count,
-                                              price: productController
-                                                  .product[i].price,
-                                              subTotalPrice:
-                                                  cartController.count *
-                                                      productController
-                                                          .product[i].price,
-                                              category: category,
-                                              img: productController
-                                                  .product[i].photo,
-                                            ),
-                                          );
-                                        },
-                                      );
-                                    },
-                                  )
-                                : Navigator.of(context).pushNamed("login");
-                          },
-                        );
-                      },
+                                                await cartController.isExisting(
+                                                  CartP(
+                                                    userId: userController
+                                                        .userInfo!.id,
+                                                    mealId: productController
+                                                        .product[i].id,
+                                                    name: productController
+                                                        .product[i].name,
+                                                    count: cartController.count,
+                                                    price: productController
+                                                        .product[i].price,
+                                                    subTotalPrice:
+                                                        cartController.count *
+                                                            productController
+                                                                .product[i]
+                                                                .price,
+                                                    category: category,
+                                                    img: productController
+                                                        .product[i].photo,
+                                                  ),
+                                                );
+                                              },
+                                            );
+                                          },
+                                        )
+                                      : Navigator.of(context)
+                                          .pushNamed("login");
+                                },
+                              );
+                            },
+                          ),
+                        ),
+                      ],
                     );
             },
           );
         });
   }
 }
+/*
+ Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        if (category == "Pizza")
+                          Text(
+                            "Large Pizza",
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context).textTheme.headline4,
+                          ),
+                        SizedBox(
+                          height: mq.size.height * 0.75,
+                          child: ListView.separated(
+                            //physics: NeverScrollableScrollPhysics(),
+                            padding: EdgeInsets.only(
+                              bottom: mq.size.height * 0.075,
+                              top: mq.size.height * 0.013,
+                              right: mq.size.width * 0.025,
+                              left: mq.size.width * 0.025,
+                            ),
+                            itemCount: length,
+                            separatorBuilder: (context, i) {
+                              if (i == 2 && category == "Pizza") {
+                                return Text(
+                                  "Medium Pizza",
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context).textTheme.headline4,
+                                );
+                              } else if (i == 5 && category == "Pizza") {
+                                return Text(
+                                  "Small Pizza",
+                                  textAlign: TextAlign.center,
+                                  style: Theme.of(context).textTheme.headline4,
+                                );
+                              } else {
+                                return const SizedBox();
+                              }
+                            },
+                            itemBuilder: (BuildContext context, i) {
+                              return ProductCard(
+                                image:
+                                    "${Data.imgPath}${productController.product[i].photo}",
+                                category: category,
+                                name: productController.product[i].name,
+                                price: productController.product[i].price,
+                                onClick: () {
+                                  userController.isLogin
+                                      ? showDialog(
+                                          context: context,
+                                          builder: (context) {
+                                            return CountDialog(
+                                              onIncrement: () {
+                                                cartController.increment();
+                                              },
+                                              onDecrement: () {
+                                                cartController.decrement();
+                                              },
+                                              onConfirm: () async {
+                                                Navigator.of(context).pop();
+
+                                                await cartController.isExisting(
+                                                  CartP(
+                                                    userId: userController
+                                                        .userInfo!.id,
+                                                    mealId: productController
+                                                        .product[i].id,
+                                                    name: productController
+                                                        .product[i].name,
+                                                    count: cartController.count,
+                                                    price: productController
+                                                        .product[i].price,
+                                                    subTotalPrice:
+                                                        cartController.count *
+                                                            productController
+                                                                .product[i]
+                                                                .price,
+                                                    category: category,
+                                                    img: productController
+                                                        .product[i].photo,
+                                                  ),
+                                                );
+                                              },
+                                            );
+                                          },
+                                        )
+                                      : Navigator.of(context)
+                                          .pushNamed("login");
+                                },
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                    )
+ */
