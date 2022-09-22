@@ -4,9 +4,9 @@ import '../main.dart';
 
 class Data with ChangeNotifier {
   static String apiPath =
-      "https://mohammadbahlaq.000webhostapp.com/api/"; //http://10.0.2.2/EatAtHome/api/
+      "http://10.0.2.2/EatAtHome/api/"; //https://mohammadbahlaq.000webhostapp.com/api/
   static String imgPath =
-      "https://mohammadbahlaq.000webhostapp.com/images/"; //http://10.0.2.2/EatAtHome/images/
+      "http://10.0.2.2/EatAtHome/images/"; //https://mohammadbahlaq.000webhostapp.com/images/
 
   bool isVisiable = true;
   bool remember = false;

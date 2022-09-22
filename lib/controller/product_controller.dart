@@ -30,7 +30,7 @@ class ProductController extends ChangeNotifier {
     notifyListeners();
   }
 
-  void setCategory(int category) async {
+  Future<void> setCategory(int category) async {
     if (category == 0) {
       await getProduct("Pizza");
       print("Pizza");

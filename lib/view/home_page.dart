@@ -17,15 +17,16 @@ class Home extends StatelessWidget {
     final UserController userController = context.read<UserController>();
     final ProductController productCrt = context.read<ProductController>();
     final mq = MediaQuery.of(context);
+
     return DefaultTabController(
       length: 5,
       child: Scaffold(
         appBar: CustomAppBar(
           size: MediaQuery.of(context).size.height * 0.035,
           bottom: TabBar(
-            onTap: (value) {
+            onTap: (value) async {
               print("Valuse:$value");
-              productCrt.setCategory(value);
+              await productCrt.setCategory(value);
             },
             tabs: const [
               Tab(
@@ -47,6 +48,7 @@ class Home extends StatelessWidget {
           alignment: Alignment.bottomCenter,
           children: [
             const TabBarView(
+              physics: NeverScrollableScrollPhysics(),
               children: [
                 Category(category: "Pizza"),
                 Category(category: "Sandwich"),

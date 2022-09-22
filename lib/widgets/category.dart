@@ -2,7 +2,6 @@ import 'package:eat_at_home/controller/cart_controller.dart';
 import 'package:eat_at_home/controller/data_controller.dart';
 import 'package:eat_at_home/controller/product_controller.dart';
 import 'package:eat_at_home/controller/user_controller.dart';
-import 'package:eat_at_home/main.dart';
 import 'package:eat_at_home/widgets/count_dialog.dart';
 import 'package:eat_at_home/widgets/product_card.dart';
 import 'package:flutter/material.dart';
@@ -33,18 +32,10 @@ class Category extends StatelessWidget {
         return length == 0
             ? const Center(child: CircularProgressIndicator())
             : Column(
-                //mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // if (category == "Pizza")
-                  // Text(
-                  //   "Large Pizza",
-                  //   textAlign: TextAlign.center,
-                  //   style: Theme.of(context).textTheme.headline4,
-                  // ),
                   SizedBox(
                     height: mq.size.height * 0.7582,
                     child: ListView.separated(
-                      //physics: const NeverScrollableScrollPhysics(),
                       padding: EdgeInsets.only(
                         bottom: mq.size.height * 0.075,
                         top: mq.size.height * 0.013,

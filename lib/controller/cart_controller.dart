@@ -31,7 +31,10 @@ class CartController with ChangeNotifier {
       },
     );
 
-    if (jsonDecode(response.body) == 1) {
+    int transId = int.parse(response.body);
+
+    if (transId != 0) {
+      product.transId = transId;
       cart.add(product);
     }
     ////////////////////////////////////
@@ -76,7 +79,7 @@ class CartController with ChangeNotifier {
         ),
       );
     }
-
+    //print(cart[0].transId);
     calculateTotalPrice();
     calculateAllCount();
     notifyListeners();
@@ -84,10 +87,13 @@ class CartController with ChangeNotifier {
 
   Future<void> isExisting(CartP product) async {
     int index = contains(product.name);
+    print("isContained : $index");
 
     if (index != -1) {
       String url = "${Data.apiPath}update_count_cart.php";
-
+      print("count: ${cart[index].count + product.count}");
+      print("id: ${cart[index].transId}");
+      print("subprice: ${cart[index].subTotalPrice + product.subTotalPrice}");
       var response = await http.post(
         Uri.parse(url),
         body: {
