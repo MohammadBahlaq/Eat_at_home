@@ -17,7 +17,11 @@ class BillController with ChangeNotifier {
 
   Future<void> getBill(int userid) async {
     bills.clear();
-    String url = "${Data.apiPath}select_user_bill.php?userid=$userid";
+    DateTime date = DateTime.now();
+
+    String url = "${Data.apiPath}select_user_bill.php?userid=$userid"
+        "&today=${date.day}/${date.month}/${date.year}&"
+        "yesterday=${date.day - 1}/${date.month}/${date.year}";
 
     var response = await http.get(Uri.parse(url));
     var responsebody = jsonDecode(response.body);

@@ -18,8 +18,6 @@ class CartController with ChangeNotifier {
   }
 
   Future<void> addToCart(CartP product) async {
-    totalPrice += product.subTotalPrice;
-    countAll += count;
     String url = "${Data.apiPath}insert_cart.php";
     var response = await http.post(
       Uri.parse(url),
@@ -34,8 +32,11 @@ class CartController with ChangeNotifier {
     int transId = int.parse(response.body);
 
     if (transId != 0) {
+      print(transId);
       product.transId = transId;
       cart.add(product);
+      totalPrice += product.subTotalPrice;
+      countAll += count;
     }
     ////////////////////////////////////
     count = 1;
@@ -71,7 +72,7 @@ class CartController with ChangeNotifier {
           userId: element['user_fk'],
           mealId: element['Meal_id'],
           name: element['name'],
-          price: element['price'],
+          price: element['price'].toDouble(),
           category: element['category'],
           img: element['photo'],
           count: element['count'],
@@ -134,7 +135,7 @@ class CartController with ChangeNotifier {
     });
 
     int billID = int.parse(response.body);
-    print("Bill id: $billID");
+
     url = "${Data.apiPath}confirme.php";
     for (CartP product in products) {
       response = await http.post(
@@ -147,9 +148,8 @@ class CartController with ChangeNotifier {
           "billid": "$billID"
         },
       );
-      print("Meal id: ${product.mealId}");
     }
-    print(int.parse(response.body));
+
     return int.parse(response.body);
   }
 

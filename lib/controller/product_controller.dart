@@ -6,16 +6,15 @@ import 'package:http/http.dart' as http;
 
 class ProductController extends ChangeNotifier {
   List<Product> product = [];
-  //String category = "Pizza";
-  int x = 0;
+
   Future<void> getProduct(String category) async {
     product.clear();
-    print("Category: $category");
+
     String url = "${Data.apiPath}select_meal.php?category=$category";
 
     var response = await http.get(Uri.parse(url));
     var responsebody = jsonDecode(response.body);
-    //print(responsebody);
+
     for (var element in responsebody) {
       product.add(
         Product(

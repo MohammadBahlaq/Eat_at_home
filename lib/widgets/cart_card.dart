@@ -42,7 +42,7 @@ class CartCard extends StatelessWidget {
               image,
               height: mq.size.height * 0.13,
               width: mq.size.width * 0.28,
-              fit: category == "Beverages" ? BoxFit.contain : BoxFit.fill,
+              fit: category == "Drinks" ? BoxFit.contain : BoxFit.fill,
             ),
           ),
           Column(

@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print, use_build_context_synchronously
 
 import 'package:eat_at_home/controller/data_controller.dart';
+import 'package:eat_at_home/controller/product_controller.dart';
 import 'package:eat_at_home/controller/user_controller.dart';
 import 'package:eat_at_home/widgets/custom_dialog.dart';
 import 'package:eat_at_home/widgets/custom_textfield.dart';
@@ -17,6 +18,7 @@ class Login extends StatelessWidget {
   Widget build(BuildContext context) {
     final CartController cartController = context.read<CartController>();
     final UserController userController = context.read<UserController>();
+    final ProductController productCrt = context.read<ProductController>();
 
     final GlobalKey<FormState> formKey = GlobalKey<FormState>();
     final TextEditingController txtEmail = TextEditingController();
@@ -106,6 +108,7 @@ class Login extends StatelessWidget {
                     if (msg == 1) {
                       //userController.setLogin = true;
                       cartController.getCart(userController.userInfo!.id);
+                      productCrt.getProduct("Pizza");
                       Navigator.of(context)
                           .pushNamedAndRemoveUntil("home", (route) => false);
                       if (dataController.remember) {
