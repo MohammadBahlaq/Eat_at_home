@@ -1,5 +1,5 @@
 import 'package:eat_at_home/controller/bill_controller.dart';
-import 'package:eat_at_home/view/bill_detailes.dart';
+import 'package:eat_at_home/view/bill_detailes_page.dart';
 import 'package:eat_at_home/widgets/bill_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

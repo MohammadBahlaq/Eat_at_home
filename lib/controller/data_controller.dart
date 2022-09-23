@@ -9,10 +9,16 @@ class Data with ChangeNotifier {
       "http://10.0.2.2/EatAtHome/images/"; //https://mohammadbahlaq.000webhostapp.com/images/
 
   bool isVisiable = true;
+  bool isVisiableSignup = true;
   bool remember = false;
 
   void visibility() {
     isVisiable = !isVisiable;
+    notifyListeners();
+  }
+
+  void visibilityS() {
+    isVisiableSignup = !isVisiableSignup;
     notifyListeners();
   }
 

@@ -25,7 +25,6 @@ class Home extends StatelessWidget {
           size: MediaQuery.of(context).size.height * 0.035,
           bottom: TabBar(
             onTap: (value) async {
-              print("Valuse:$value");
               await productCrt.setCategory(value);
             },
             tabs: const [

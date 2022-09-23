@@ -3,6 +3,7 @@
 import 'dart:convert';
 import 'package:eat_at_home/controller/data_controller.dart';
 import 'package:eat_at_home/model/user.dart';
+import 'package:email_auth/email_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
@@ -59,6 +60,31 @@ class UserController with ChangeNotifier {
       return 1;
     } else {
       return 0;
+    }
+  }
+
+  Future<bool> sendOTP(String email) async {
+    EmailAuth emailAuth = EmailAuth(sessionName: "Eat At Home");
+    var res = await emailAuth.sendOtp(recipientMail: email);
+
+    if (res) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  bool verifyOTP(String email, String otp) {
+    EmailAuth emailAuth = EmailAuth(sessionName: "Eat At Home");
+    bool res = emailAuth.validateOtp(
+      recipientMail: email,
+      userOtp: otp,
+    );
+
+    if (res) {
+      return true;
+    } else {
+      return false;
     }
   }
 }

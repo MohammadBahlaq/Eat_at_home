@@ -1,6 +1,4 @@
-import 'package:eat_at_home/controller/data_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class CustomTextFeild extends StatelessWidget {
   const CustomTextFeild({
@@ -12,7 +10,6 @@ class CustomTextFeild extends StatelessWidget {
     this.obscureText = false,
     this.validator,
     this.suffixIcon,
-    this.onVisiable,
   }) : super(key: key);
 
   final String labelText;
@@ -22,7 +19,7 @@ class CustomTextFeild extends StatelessWidget {
   final String? Function(String?)? validator;
   final TextEditingController controller;
   final Widget? suffixIcon;
-  final void Function()? onVisiable;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
