@@ -25,15 +25,18 @@ class ProductCard extends StatelessWidget {
     return Column(
       children: [
         if (index == 0 && category == "Pizza")
-          Text(
-            "Large Pizza",
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.headline4,
+          Padding(
+            padding: const EdgeInsets.only(bottom: 8.0),
+            child: Text(
+              "Large Pizza",
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.headline4,
+            ),
           ),
         Container(
           margin: EdgeInsets.only(bottom: mq.size.height / 50),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(10),
@@ -44,6 +47,7 @@ class ProductCard extends StatelessWidget {
                   fit: category == "Drinks" ? BoxFit.contain : BoxFit.fill,
                 ),
               ),
+              SizedBox(width: mq.size.width * 0.05),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -62,12 +66,12 @@ class ProductCard extends StatelessWidget {
                   ),
                 ],
               ),
-              CustonButton(
-                icon: const Icon(Icons.add),
-                color: Theme.of(context).primaryColor,
-                padding: 0,
-                onClick: onClick,
-              ),
+              // CustonButton(
+              //   icon: const Icon(Icons.add),
+              //   color: Theme.of(context).primaryColor, //
+              //   padding: 0,
+              //   onClick: onClick,
+              // ),
             ],
           ),
         ),
