@@ -1,9 +1,7 @@
-import 'package:badges/badges.dart';
 import 'package:eat_at_home/controller/cart_controller.dart';
 import 'package:eat_at_home/controller/data_controller.dart';
 import 'package:eat_at_home/controller/product_controller.dart';
 import 'package:eat_at_home/controller/user_controller.dart';
-import 'package:eat_at_home/widgets/count_dialog.dart';
 import 'package:eat_at_home/widgets/inc_dec_buttons.dart';
 import 'package:eat_at_home/widgets/login_signup_btn.dart';
 import 'package:eat_at_home/widgets/product_card.dart';
@@ -202,7 +200,7 @@ class Category extends StatelessWidget {
                                                         MainAxisAlignment
                                                             .spaceAround,
                                                     children: [
-                                                      CustonButton(
+                                                      IncDecButton(
                                                         icon: const Icon(
                                                             Icons.add,
                                                             color:
@@ -230,7 +228,7 @@ class Category extends StatelessWidget {
                                                           );
                                                         },
                                                       ),
-                                                      CustonButton(
+                                                      IncDecButton(
                                                         icon: const Icon(
                                                             Icons.remove,
                                                             color: Colors.red),

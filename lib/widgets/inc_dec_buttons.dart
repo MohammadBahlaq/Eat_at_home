@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class CustonButton extends StatelessWidget {
-  const CustonButton({
+class IncDecButton extends StatelessWidget {
+  const IncDecButton({
     Key? key,
     this.color = Colors.transparent,
     this.padding = 8,

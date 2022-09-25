@@ -14,7 +14,7 @@ class ProductController extends ChangeNotifier {
 
     var response = await http.get(Uri.parse(url));
     var responsebody = jsonDecode(response.body);
-
+    product.clear();
     for (var element in responsebody) {
       product.add(
         Product(
@@ -32,19 +32,14 @@ class ProductController extends ChangeNotifier {
   Future<void> setCategory(int category) async {
     if (category == 0) {
       await getProduct("Pizza");
-      print("Pizza");
     } else if (category == 1) {
       await getProduct("Sandwich");
-      print("Sandwisc");
     } else if (category == 2) {
       await getProduct("Salad");
-      print("Salad");
     } else if (category == 3) {
       await getProduct("Drinks");
-      print("Drinks");
     } else if (category == 4) {
       await getProduct("Other");
-      print("Other");
     }
   }
 }

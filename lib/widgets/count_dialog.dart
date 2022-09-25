@@ -30,7 +30,7 @@ class CountDialog extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              CustonButton(
+              IncDecButton(
                 icon: const Icon(Icons.add, color: Colors.green),
                 color: Colors.transparent,
                 onClick: onIncrement,
@@ -46,7 +46,7 @@ class CountDialog extends StatelessWidget {
                   );
                 },
               ),
-              CustonButton(
+              IncDecButton(
                 icon: const Icon(Icons.remove, color: Colors.red),
                 color: Colors.transparent,
                 onClick: onDecrement,

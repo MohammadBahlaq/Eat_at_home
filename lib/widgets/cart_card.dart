@@ -59,7 +59,7 @@ class CartCard extends StatelessWidget {
               SizedBox(height: mq.size.height / 50),
               Row(
                 children: [
-                  CustonButton(
+                  IncDecButton(
                     icon: const Icon(Icons.add, color: Colors.green),
                     onClick: onIncrement,
                   ),
@@ -76,7 +76,7 @@ class CartCard extends StatelessWidget {
                       );
                     },
                   ),
-                  CustonButton(
+                  IncDecButton(
                     icon: const Icon(Icons.remove, color: Colors.red),
                     onClick: onDecrement,
                   ),
