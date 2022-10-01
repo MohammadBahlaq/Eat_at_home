@@ -66,14 +66,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
               ),
               onTap: () async {
-                if (userController.isLogin) {
-                  Navigator.pushNamed(context, "cart");
-                  cartController.setLoading(0);
-                  await cartController.getCart(userController.userInfo!.id);
-                  cartController.setLoading(1);
-                } else {
-                  Navigator.pushNamed(context, "login");
-                }
+                //if (userController.isLogin) {
+                Navigator.pushNamed(context, "cart");
+                cartController.setLoading(0);
+                await cartController.getCart(userController.userInfo!.id);
+                cartController.setLoading(1);
+                //} else {
+                //Navigator.pushNamed(context, "login");
+                //}
               },
             ),
             IconButton(
@@ -85,7 +85,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       return CustomDialog(
                           onClick: () {
                             userController.setLogin = false;
-                            cartController.logoutCart();
+                            //cartController.logoutCart();
                             Navigator.of(context).pop();
                           },
                           title: "Logout",

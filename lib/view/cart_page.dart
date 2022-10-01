@@ -53,40 +53,27 @@ class Cart extends StatelessWidget {
               ),
               onClick: () async {
                 DateTime date = DateTime.now();
-
-                if (cartController.cart.isNotEmpty) {
-                  showDialog(
-                    context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                        content: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            const Text("Loading...",
-                                style: TextStyle(fontSize: 18)),
-                            SizedBox(
-                                height:
-                                    MediaQuery.of(context).size.height / 25),
-                            const CircularProgressIndicator(),
-                          ],
-                        ),
-                      );
-                    },
-                  );
-                  await cartController.confirm(
-                            BillP(
-                              date: "${date.day}/${date.month}/${date.year}",
-                              time:
-                                  "${date.hour.toString().padLeft(2, "0")}:${date.minute.toString().padLeft(2, "0")}",
-                              status: 1,
-                              totalprice: cartController.totalPrice,
-                            ),
-                            cartController.cart,
-                          ) ==
-                          1
-                      // 0 == 1
-                      ? showAlertDialog(context, billController, userController)
-                      : showSnackBar(context, mq);
+                if (userController.isLogin) {
+                  if (cartController.cart.isNotEmpty) {
+                    loadingDialog(context);
+                    await cartController.confirm(
+                              BillP(
+                                date: "${date.day}/${date.month}/${date.year}",
+                                time:
+                                    "${date.hour.toString().padLeft(2, "0")}:${date.minute.toString().padLeft(2, "0")}",
+                                status: 1,
+                                totalprice: cartController.totalPrice,
+                              ),
+                              cartController.cart,
+                            ) ==
+                            1
+                        // 0 == 1
+                        ? showAlertDialog(
+                            context, billController, userController)
+                        : showSnackBar(context, mq);
+                  }
+                } else {
+                  Navigator.of(context).pushNamed("login");
                 }
               },
               //padding: 0,
@@ -138,6 +125,24 @@ class Cart extends StatelessWidget {
             print(billController.bills.length);
             billController.setLoading(1);
           },
+        );
+      },
+    );
+  }
+
+  void loadingDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text("Loading...", style: TextStyle(fontSize: 18)),
+              SizedBox(height: MediaQuery.of(context).size.height / 25),
+              const CircularProgressIndicator(),
+            ],
+          ),
         );
       },
     );

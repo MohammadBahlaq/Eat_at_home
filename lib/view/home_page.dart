@@ -105,14 +105,15 @@ class Home extends StatelessWidget {
                 },
               ),
               onClick: () async {
-                if (userController.isLogin) {
-                  Navigator.pushNamed(context, "cart");
-                  cartController.setLoading(0);
-                  await cartController.getCart(userController.userInfo!.id);
-                  cartController.setLoading(1);
-                } else {
-                  Navigator.pushNamed(context, "login");
-                }
+                print("MOhammad");
+                //if (userController.isLogin) {
+                Navigator.pushNamed(context, "cart");
+                cartController.setLoading(0);
+                await cartController.getCart(userController.userInfo!.id);
+                cartController.setLoading(1);
+                //} else {
+                //Navigator.pushNamed(context, "login");
+                //}
               },
             )
           ],
