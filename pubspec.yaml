@@ -41,6 +41,7 @@ dependencies:
   shared_preferences: ^2.0.15
   badges: ^2.0.3
   email_auth: ^1.0.0
+  sqflite: ^2.1.0
   
 
 dev_dependencies:

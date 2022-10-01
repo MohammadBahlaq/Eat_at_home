@@ -44,7 +44,7 @@ class Category extends StatelessWidget {
                       separatorBuilder: (context, i) {
                         if (i == 2 && category == "Pizza") {
                           return Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8),
+                            padding: const EdgeInsets.only(top: 10, bottom: 15),
                             child: Text(
                               "Medium Pizza",
                               textAlign: TextAlign.center,
@@ -53,7 +53,7 @@ class Category extends StatelessWidget {
                           );
                         } else if (i == 5 && category == "Pizza") {
                           return Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 8),
+                            padding: const EdgeInsets.only(top: 10, bottom: 15),
                             child: Text(
                               "Small Pizza",
                               textAlign: TextAlign.center,

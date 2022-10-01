@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:eat_at_home/controller/data_controller.dart';
+import 'package:eat_at_home/controller/sqflite_controller.dart';
 import 'package:eat_at_home/model/Cart.dart';
 import 'package:eat_at_home/model/bill.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ class CartController with ChangeNotifier {
   int count = 1;
   int countAll = 0;
   int loading = 0;
+  SqfLite mydb = SqfLite();
 
   Future<void> setLoading(int value) async {
     loading = value;
@@ -18,41 +20,70 @@ class CartController with ChangeNotifier {
   }
 
   Future<void> addToCart(CartP product) async {
-    String url = "${Data.apiPath}insert_cart.php";
-    var response = await http.post(
-      Uri.parse(url),
-      body: {
-        "userid": "${product.userId}",
-        "mealid": "${product.mealId}",
-        "count": "${product.count}",
-        "subprice": "${product.subTotalPrice}",
-      },
+    // String url = "${Data.apiPath}insert_cart.php";
+    // var response = await http.post(
+    //   Uri.parse(url),
+    //   body: {
+    //     "userid": "${product.userId}",
+    //     "mealid": "${product.mealId}",
+    //     "count": "${product.count}",
+    //     "subprice": "${product.subTotalPrice}",
+    //   },
+    // );
+
+    // int transId = int.parse(response.body);
+
+    // if (transId != 0) {
+    //   //print("total price: $totalPrice - count all: $countAll");
+    //   product.transId = transId;
+    //   cart.add(product);
+    //   totalPrice += product.subTotalPrice;
+    //   countAll += count;
+    //   //print("total price: $totalPrice - count all: $countAll");
+    // }
+    ////////////////////////////////////
+    //SqfLite
+    int insert = await mydb.insertData(
+      '''
+      INSERT INTO cart (user_id, meal_id, count, price, name, sub_price, img, category) 
+      VALUES(${product.userId},${product.mealId},${product.count},${product.price},
+    '${product.name}',${product.subTotalPrice},'${product.img}','${product.category}');
+      ''',
     );
-
-    int transId = int.parse(response.body);
-
-    if (transId != 0) {
-      print(transId);
-      product.transId = transId;
+    if (insert != 0) {
       cart.add(product);
       totalPrice += product.subTotalPrice;
       countAll += count;
     }
+
+    // List<Map> responseSqf = await mydb.selectData("select * from cart");
+    // print(responseSqf);
+
     ////////////////////////////////////
     count = 1;
     notifyListeners();
   }
 
   void deleteFormCart(CartP product) async {
-    totalPrice -= product.subTotalPrice;
-    String url = "${Data.apiPath}delete_cart.php";
+    // String url = "${Data.apiPath}delete_cart.php";
 
-    var response = await http.post(
-      Uri.parse(url),
-      body: {"transid": "${product.transId}"},
-    );
+    // var response = await http.post(
+    //   Uri.parse(url),
+    //   body: {"transid": "${product.transId}"},
+    // );
 
-    if (jsonDecode(response.body) == 1) {
+    // if (jsonDecode(response.body) == 1) {
+    //  totalPrice -= product.subTotalPrice;
+    //   countAll -= product.count;
+    //   cart.remove(product);
+    //   notifyListeners();
+    // }
+
+    //SqfLite
+    int delete = await mydb
+        .deleteData("delete from cart where tr_id = ${product.transId}");
+    if (delete == 1) {
+      totalPrice -= product.subTotalPrice;
       countAll -= product.count;
       cart.remove(product);
       notifyListeners();
@@ -60,56 +91,91 @@ class CartController with ChangeNotifier {
   }
 
   Future<void> getCart(int userid) async {
-    String url = "${Data.apiPath}select_cart.php?userid=$userid";
+    // String url = "${Data.apiPath}select_cart.php?userid=$userid";
 
-    var response = await http.get(Uri.parse(url));
-    List responsebody = jsonDecode(response.body);
+    // var response = await http.get(Uri.parse(url));
+    // List responsebody = jsonDecode(response.body);
+    //cart.clear();
+    // for (var element in responsebody) {
+    //   cart.add(
+    //     CartP(
+    //       transId: element['Transaction_id'],
+    //       userId: element['user_fk'],
+    //       mealId: element['Meal_id'],
+    //       name: element['name'],
+    //       price: element['price'].toDouble(),
+    //       category: element['category'],
+    //       img: element['photo'],
+    //       count: element['count'],
+    //       subTotalPrice: element['subPrice'].toDouble(),
+    //     ),
+    //   );
+    // }
+
+    //SqfLite
     cart.clear();
-    for (var element in responsebody) {
+    List<Map> select = await mydb.selectData("select * from cart");
+    //print(select);
+    for (var element in select) {
       cart.add(
         CartP(
-          transId: element['Transaction_id'],
-          userId: element['user_fk'],
-          mealId: element['Meal_id'],
+          transId: element['tr_id'],
+          userId: element['user_id'],
+          mealId: element['meal_id'],
           name: element['name'],
           price: element['price'].toDouble(),
           category: element['category'],
-          img: element['photo'],
+          img: element['img'],
           count: element['count'],
-          subTotalPrice: element['subPrice'].toDouble(),
+          subTotalPrice: element['sub_price'].toDouble(),
         ),
       );
     }
-    //print(cart[0].transId);
     calculateTotalPrice();
     calculateAllCount();
     notifyListeners();
   }
 
   Future<void> isExisting(CartP product) async {
+    //mydb.deleteData("delete from cart");
     int index = contains(product.name);
-    print("isContained : $index");
+    //print("isContained : $index");
 
     if (index != -1) {
-      String url = "${Data.apiPath}update_count_cart.php";
-      print("count: ${cart[index].count + product.count}");
-      print("id: ${cart[index].transId}");
-      print("subprice: ${cart[index].subTotalPrice + product.subTotalPrice}");
-      var response = await http.post(
-        Uri.parse(url),
-        body: {
-          "count": "${cart[index].count + product.count}",
-          "id": "${cart[index].transId}",
-          "subprice": "${cart[index].subTotalPrice + product.subTotalPrice}",
-        },
-      );
-      if (int.parse(response.body) == 1) {
+      // String url = "${Data.apiPath}update_count_cart.php";
+      // // print("count: ${cart[index].count + product.count}");
+      // // print("id: ${cart[index].transId}");
+      // // print("subprice: ${cart[index].subTotalPrice + product.subTotalPrice}");
+      // var response = await http.post(
+      //   Uri.parse(url),
+      //   body: {
+      //     "count": "${cart[index].count + product.count}",
+      //     "id": "${cart[index].transId}",
+      //     "subprice": "${cart[index].subTotalPrice + product.subTotalPrice}",
+      //   },
+      // );
+      // if (int.parse(response.body) == 1) {
+      //   cart[index].count += count;
+      //   countAll += count;
+      //   totalPrice += product.subTotalPrice;
+      //   count = 1;
+      //   notifyListeners();
+      // }
+
+      //SqfLite
+      int update = await mydb.updateData('''
+          UPDATE cart SET count = ${cart[index].count + product.count}, 
+          sub_price = ${cart[index].subTotalPrice + product.subTotalPrice} WHERE tr_id = ${cart[index].transId}
+          ''');
+
+      if (update == 1) {
         cart[index].count += count;
         countAll += count;
         totalPrice += product.subTotalPrice;
         count = 1;
         notifyListeners();
       }
+      //print(await mydb.selectData("select * from cart"));
     } else {
       await addToCart(product);
     }
@@ -150,6 +216,12 @@ class CartController with ChangeNotifier {
       );
     }
 
+    mydb.deleteData("Delete from cart");
+    cart.clear();
+    totalPrice = 0;
+    countAll = 0;
+    notifyListeners();
+
     return int.parse(response.body);
   }
 
@@ -169,17 +241,30 @@ class CartController with ChangeNotifier {
   }
 
   Future<void> incrementCount(CartP product) async {
-    String url = "${Data.apiPath}update_count_cart.php";
+    // String url = "${Data.apiPath}update_count_cart.php";
 
-    var response = await http.post(
-      Uri.parse(url),
-      body: {
-        "count": "${product.count + 1}",
-        "id": "${product.transId}",
-        "subprice": "${product.price * (product.count + 1)}"
-      },
-    );
-    if (int.parse(response.body) == 1) {
+    // var response = await http.post(
+    //   Uri.parse(url),
+    //   body: {
+    //     "count": "${product.count + 1}",
+    //     "id": "${product.transId}",
+    //     "subprice": "${product.price * (product.count + 1)}"
+    //   },
+    // );
+    // if (int.parse(response.body) == 1) {
+    //   product.count++;
+    //   product.subTotalPrice += product.price;
+    //   totalPrice += product.price;
+    //   countAll++;
+    //   notifyListeners();
+    // }
+
+    //SqfLite
+    int update = await mydb.updateData('''
+          UPDATE cart SET count = ${product.count + 1}, 
+          sub_price = ${product.price * (product.count + 1)} WHERE tr_id = ${product.transId}
+          ''');
+    if (update == 1) {
       product.count++;
       product.subTotalPrice += product.price;
       totalPrice += product.price;
@@ -190,20 +275,33 @@ class CartController with ChangeNotifier {
 
   Future<void> decrementCount(CartP product) async {
     if (product.count > 1) {
-      String url = "${Data.apiPath}update_count_cart.php";
-      var response = await http.post(
-        Uri.parse(url),
-        body: {
-          "count": "${product.count - 1}",
-          "id": "${product.transId}",
-          "subprice": "${product.price * (product.count - 1)}"
-        },
-      );
-      if (int.parse(response.body) == 1) {
+      // String url = "${Data.apiPath}update_count_cart.php";
+      // var response = await http.post(
+      //   Uri.parse(url),
+      //   body: {
+      //     "count": "${product.count - 1}",
+      //     "id": "${product.transId}",
+      //     "subprice": "${product.price * (product.count - 1)}"
+      //   },
+      // );
+      // if (int.parse(response.body) == 1) {
+      //   product.count--;
+      //   countAll--;
+      //   product.subTotalPrice -= product.price;
+      //   totalPrice -= product.price;
+      //   notifyListeners();
+      // }
+
+      //SqfLite
+      int update = await mydb.updateData('''
+          UPDATE cart SET count = ${product.count - 1}, 
+          sub_price = ${product.price * (product.count - 1)} WHERE tr_id = ${product.transId}
+          ''');
+      if (update == 1) {
         product.count--;
-        countAll--;
         product.subTotalPrice -= product.price;
         totalPrice -= product.price;
+        countAll--;
         notifyListeners();
       }
     } else {

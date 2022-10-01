@@ -26,7 +26,7 @@ class ProductCard extends StatelessWidget {
       children: [
         if (index == 0 && category == "Pizza")
           Padding(
-            padding: const EdgeInsets.only(bottom: 8.0),
+            padding: const EdgeInsets.only(bottom: 10),
             child: Text(
               "Large Pizza",
               textAlign: TextAlign.center,
