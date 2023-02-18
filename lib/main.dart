@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:eat_at_home/controller/bill_controller.dart';
 import 'package:eat_at_home/controller/cart_controller.dart';
 import 'package:eat_at_home/controller/product_controller.dart';

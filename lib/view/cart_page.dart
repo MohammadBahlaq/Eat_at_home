@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:eat_at_home/controller/bill_controller.dart';
 import 'package:eat_at_home/controller/user_controller.dart';
 import 'package:eat_at_home/model/bill.dart';
