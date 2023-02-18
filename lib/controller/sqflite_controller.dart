@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages, avoid_print
+
 import 'dart:async';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart' show join;

@@ -1,9 +1,7 @@
 import 'package:eat_at_home/controller/data_controller.dart';
 import 'package:eat_at_home/view/verify_page.dart';
-import 'package:eat_at_home/widgets/custom_dialog.dart';
 import 'package:eat_at_home/widgets/custom_textfield.dart';
 import 'package:eat_at_home/widgets/login_signup_btn.dart';
-import 'package:email_auth/email_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:string_validator/string_validator.dart';

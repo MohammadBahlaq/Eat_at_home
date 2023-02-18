@@ -1,6 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart' as badges;
 import 'package:eat_at_home/controller/bill_controller.dart';
 import 'package:eat_at_home/controller/cart_controller.dart';
 import 'package:eat_at_home/controller/user_controller.dart';
@@ -46,7 +46,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             InkWell(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Badge(
+                child: badges.Badge(
                   padding: const EdgeInsets.all(3),
                   badgeContent: Selector<CartController, int>(
                     selector: (context, cartC) => cartC.countAll,
@@ -57,7 +57,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       );
                     }),
                   ),
-                  animationType: BadgeAnimationType.slide,
+                  animationType: badges.BadgeAnimationType.slide,
                   //position: BadgePosition.topEnd(end: 0, top: -4),
                   child: const Icon(
                     Icons.shopping_cart,

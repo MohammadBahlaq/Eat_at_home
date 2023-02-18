@@ -1,4 +1,6 @@
-import 'package:badges/badges.dart';
+// ignore_for_file: avoid_print
+
+import 'package:badges/badges.dart' as badges;
 import 'package:eat_at_home/controller/user_controller.dart';
 import 'package:eat_at_home/widgets/appbar.dart';
 import 'package:eat_at_home/widgets/login_signup_btn.dart';
@@ -66,9 +68,9 @@ class Home extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Badge(
+                          badges.Badge(
                             alignment: Alignment.center,
-                            shape: BadgeShape.square,
+                            shape: badges.BadgeShape.square,
                             padding: EdgeInsets.symmetric(
                               horizontal: mq.size.width * 0.013,
                               vertical: mq.size.height * 0.003,

@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:eat_at_home/controller/data_controller.dart';
 import 'package:eat_at_home/controller/product_controller.dart';
 import 'package:eat_at_home/controller/user_controller.dart';
@@ -96,6 +98,8 @@ class Login extends StatelessWidget {
               CustomButton(
                 text: const Text("Login", style: TextStyle(fontSize: 18)),
                 onClick: () async {
+                  var nav = Navigator.of(context);
+
                   if (formKey.currentState!.validate()) {
                     showLoadingDialog(context);
                     final int msg = await userController.login(
@@ -107,14 +111,13 @@ class Login extends StatelessWidget {
                       //userController.setLogin = true;
                       cartController.getCart(userController.userInfo!.id);
                       productCrt.getProduct("Pizza");
-                      Navigator.of(context)
-                          .pushNamedAndRemoveUntil("home", (route) => false);
+                      nav.pushNamedAndRemoveUntil("home", (route) => false);
                       if (dataController.remember) {
                         dataController.checkRemember(txtEmail.text,
                             txtPassword.text, userController.userInfo!.id);
                       }
                     } else {
-                      Navigator.of(context).pop();
+                      nav.pop();
                       showErrorAlertDialog(context);
                     }
                   }
