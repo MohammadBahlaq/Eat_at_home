@@ -9,12 +9,19 @@ Signup page
 ![3](https://user-images.githubusercontent.com/106377304/185743899-6ebba9c7-03ea-46c5-81b9-0d39fec45959.png)
 
 Meals page
-![4](https://user-images.githubusercontent.com/106377304/185743905-6ef9ea14-15f0-475e-9efa-5fd71d975ce5.png)
-![5](https://user-images.githubusercontent.com/106377304/185743919-d8414863-3ebe-46cd-82b3-bf4853da6acd.png)
-![6](https://user-images.githubusercontent.com/106377304/185743924-a89b8aff-b7be-4661-b822-7c627757b9df.png)
-![7](https://user-images.githubusercontent.com/106377304/185743929-41d2f267-3623-4364-aa5a-a7961c4c7c9b.png)
-![8](https://user-images.githubusercontent.com/106377304/185743935-f2df16ee-0ce8-4a75-9d2e-f1a1ef1ceaca.png)
-![9](https://user-images.githubusercontent.com/106377304/185743939-2e27e448-1ae9-4e12-965b-745e90ed0abc.png)
+![1](https://github.com/user-attachments/assets/ff886333-c164-4e40-bd95-ab7c125813ee)
+![2](https://github.com/user-attachments/assets/763233a2-3d4f-4ca4-9c85-3b7dbbf243f1)
+![3](https://github.com/user-attachments/assets/79e3177f-5289-4ca8-bd71-52b0ff307ae8)
+![4](https://github.com/user-attachments/assets/65ef8170-a919-408e-b3c1-ef5fb9c36e9f)
+![5](https://github.com/user-attachments/assets/9d2832a2-9755-451e-a122-4b09041ac2c6)
+![6](https://github.com/user-attachments/assets/4bae2812-63f5-43e5-9deb-2335fd207088)
+
 
 Cart Page
-![10](https://user-images.githubusercontent.com/106377304/185743963-53e4db0a-7fc3-444e-9e47-48002b509a99.png)
+![7](https://github.com/user-attachments/assets/0418daf5-20cd-4db6-afb6-751510701085)
+
+Invoice page which user can surf their orders and see what did they ordered
+![8](https://github.com/user-attachments/assets/c8ac4495-ad90-40d3-b4cf-7fe2907a623d)
+![9](https://github.com/user-attachments/assets/5255fbd6-96a6-418b-a892-aaf790d2e38e)
+
+
