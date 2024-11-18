@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 class CustomDialog extends StatelessWidget {
   const CustomDialog({
-    Key? key,
+    super.key,
     required this.onClick,
     required this.title,
     required this.msg,
-  }) : super(key: key);
+  });
 
   final void Function() onClick;
   final String title;

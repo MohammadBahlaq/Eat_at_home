@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class Bill extends StatelessWidget {
-  const Bill({Key? key}) : super(key: key);
+  const Bill({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +34,7 @@ class Bill extends StatelessWidget {
             } else {
               return billController.bills.isEmpty
                   ? const Center(
-                      child: Text("You don't have any bill",
-                          style: TextStyle(fontSize: 18)),
+                      child: Text("You don't have any bill", style: TextStyle(fontSize: 18)),
                     )
                   : const BillBuilder();
             }

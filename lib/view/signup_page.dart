@@ -8,7 +8,7 @@ import 'package:string_validator/string_validator.dart';
 import '../controller/user_controller.dart';
 
 class Signup extends StatelessWidget {
-  const Signup({Key? key}) : super(key: key);
+  const Signup({super.key});
 
   // void verifyOTP() {
   //   EmailAuth emailAuth = EmailAuth(sessionName: "Test Session");
@@ -57,10 +57,7 @@ class Signup extends StatelessWidget {
                       icon: Icons.person,
                       keyboardType: TextInputType.name,
                       validator: (txt) {
-                        return txt!.isNotEmpty &&
-                                isAlpha(txt.replaceAll(" ", ""))
-                            ? null
-                            : "Please the name must have just alpha";
+                        return txt!.isNotEmpty && isAlpha(txt.replaceAll(" ", "")) ? null : "Please the name must have just alpha";
                       },
                     ),
                     CustomTextFeild(
@@ -69,9 +66,7 @@ class Signup extends StatelessWidget {
                       icon: Icons.email,
                       keyboardType: TextInputType.emailAddress,
                       validator: (txt) {
-                        return txt!.isNotEmpty && isEmail(txt)
-                            ? null
-                            : "Please write a valid Email";
+                        return txt!.isNotEmpty && isEmail(txt) ? null : "Please write a valid Email";
                       },
                     ),
                     Selector<Data, bool>(
@@ -84,18 +79,14 @@ class Signup extends StatelessWidget {
                           obscureText: isVisiable,
                           suffixIcon: IconButton(
                             icon: Icon(
-                              isVisiable
-                                  ? Icons.visibility
-                                  : Icons.visibility_off,
+                              isVisiable ? Icons.visibility : Icons.visibility_off,
                             ),
                             onPressed: () {
                               dataController.visibilityS();
                             },
                           ),
                           validator: (txt) {
-                            return txt!.isNotEmpty && txt.length > 7
-                                ? null
-                                : "The password must be at least 8 character";
+                            return txt!.isNotEmpty && txt.length > 7 ? null : "The password must be at least 8 character";
                           },
                         );
                       },
@@ -106,11 +97,7 @@ class Signup extends StatelessWidget {
                       icon: Icons.phone,
                       keyboardType: TextInputType.phone,
                       validator: (txt) {
-                        return txt!.isNotEmpty &&
-                                txt.length == 10 &&
-                                isNumeric(txt)
-                            ? null
-                            : "Please write a valid phone number";
+                        return txt!.isNotEmpty && txt.length == 10 && isNumeric(txt) ? null : "Please write a valid phone number";
                       },
                     ),
                   ],

@@ -55,14 +55,11 @@ class Verify extends StatelessWidget {
                       children: [
                         TextSpan(
                           text: "We have sent the verification code to the ",
-                          style: Theme.of(context).textTheme.headline2,
+                          style: Theme.of(context).textTheme.displayMedium,
                         ),
                         TextSpan(
                           text: email,
-                          style: TextStyle(
-                              decoration: TextDecoration.none,
-                              fontSize: 18,
-                              color: Theme.of(context).primaryColor),
+                          style: TextStyle(decoration: TextDecoration.none, fontSize: 18, color: Theme.of(context).primaryColor),
                         ),
                       ],
                     ),
@@ -74,9 +71,7 @@ class Verify extends StatelessWidget {
                   icon: Icons.numbers,
                   keyboardType: TextInputType.number,
                   validator: (txt) {
-                    return txt!.isNotEmpty && isNumeric(txt)
-                        ? null
-                        : "Please the verification code must have just numbers";
+                    return txt!.isNotEmpty && isNumeric(txt) ? null : "Please the verification code must have just numbers";
                   },
                 ),
               ],
@@ -89,15 +84,13 @@ class Verify extends StatelessWidget {
                 if (userController.verifyOTP(email, ctrOTP.text)) {
                   loadingDialog(context);
 
-                  int msg = await userController.signupUser(
-                      email, password, name, phone);
+                  int msg = await userController.signupUser(email, password, name, phone);
 
                   if (msg == 0) {
                     Navigator.of(context).pop();
                     existDialog(context);
                   } else {
-                    Navigator.of(context)
-                        .pushNamedAndRemoveUntil("login", (route) => false);
+                    Navigator.of(context).pushNamedAndRemoveUntil("login", (route) => false);
                   }
                 }
               }

@@ -11,7 +11,7 @@ import 'package:provider/provider.dart';
 import '../controller/cart_controller.dart';
 
 class Cart extends StatelessWidget {
-  const Cart({Key? key}) : super(key: key);
+  const Cart({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,11 +31,7 @@ class Cart extends StatelessWidget {
               if (loading == 0) {
                 return const Center(child: CircularProgressIndicator());
               } else if (loading == 1) {
-                return cartController.cart.isEmpty
-                    ? const Center(
-                        child: Text("You don't have any item",
-                            style: TextStyle(fontSize: 18)))
-                    : const CartBuilder();
+                return cartController.cart.isEmpty ? const Center(child: Text("You don't have any item", style: TextStyle(fontSize: 18))) : const CartBuilder();
               } else {
                 return const CartBuilder();
               }
@@ -61,8 +57,7 @@ class Cart extends StatelessWidget {
                     await cartController.confirm(
                               BillP(
                                 date: "${date.day}/${date.month}/${date.year}",
-                                time:
-                                    "${date.hour.toString().padLeft(2, "0")}:${date.minute.toString().padLeft(2, "0")}",
+                                time: "${date.hour.toString().padLeft(2, "0")}:${date.minute.toString().padLeft(2, "0")}",
                                 status: 1,
                                 totalprice: cartController.totalPrice,
                               ),
@@ -70,8 +65,7 @@ class Cart extends StatelessWidget {
                             ) ==
                             1
                         // 0 == 1
-                        ? showAlertDialog(
-                            context, billController, userController)
+                        ? showAlertDialog(context, billController, userController)
                         : showSnackBar(context, mq);
                   }
                 } else {
@@ -111,8 +105,7 @@ class Cart extends StatelessWidget {
     );
   }
 
-  void showAlertDialog(BuildContext context, BillController billController,
-      UserController userController) {
+  void showAlertDialog(BuildContext context, BillController billController, UserController userController) {
     Navigator.of(context).pop();
     showDialog(
       context: context,

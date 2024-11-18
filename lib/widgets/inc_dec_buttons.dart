@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 
 class IncDecButton extends StatelessWidget {
   const IncDecButton({
-    Key? key,
+    super.key,
     this.color = Colors.transparent,
     this.padding = 8,
     required this.icon,
     required this.onClick,
-  }) : super(key: key);
+  });
 
   final Color color;
 

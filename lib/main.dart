@@ -33,8 +33,7 @@ void main() async {
         productCrt.getProduct("Pizza");
 
         if (prefs!.getString("email") != null) {
-          userCrt.login(
-              prefs!.getString("email")!, prefs!.getString("password")!);
+          userCrt.login(prefs!.getString("email")!, prefs!.getString("password")!);
           cartCrt.getCart(prefs!.getInt("id")!);
         }
         return const MyApp();
@@ -44,7 +43,7 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -52,31 +51,10 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        useMaterial3: false,
         primarySwatch: Colors.blue,
         primaryColor: Colors.blueAccent,
         inputDecorationTheme: const InputDecorationTheme(),
-        textTheme: TextTheme(
-          headline1: TextStyle(
-            color: Colors.grey.shade600,
-            fontSize: 18,
-            fontWeight: FontWeight.w500,
-          ),
-          headline2: const TextStyle(
-            color: Colors.black,
-            fontSize: 20,
-            fontWeight: FontWeight.w500,
-          ),
-          headline3: const TextStyle(
-            color: Colors.brown,
-            fontSize: 18,
-            fontWeight: FontWeight.w500,
-          ),
-          headline4: const TextStyle(
-            color: Colors.grey,
-            fontSize: 25,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
       ),
       home: const Home(),
       routes: {

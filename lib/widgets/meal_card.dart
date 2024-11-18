@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 
 class MealCard extends StatelessWidget {
   const MealCard({
-    Key? key,
+    super.key,
     required this.image,
     required this.category,
     required this.name,
     required this.count,
     required this.subPrice,
-  }) : super(key: key);
+  });
 
   final String name;
   final String category;
@@ -48,8 +48,7 @@ class MealCard extends StatelessWidget {
               SizedBox(height: mq.size.height / 50),
               Text(
                 "count: $count",
-                style:
-                    const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 maxLines: 4,
                 overflow: TextOverflow.ellipsis,
               ),

@@ -1,8 +1,5 @@
 import 'package:eat_at_home/controller/data_controller.dart';
-import 'package:eat_at_home/model/bill.dart';
 import 'package:eat_at_home/widgets/cart_card.dart';
-import 'package:eat_at_home/widgets/custom_dialog.dart';
-import 'package:eat_at_home/widgets/login_signup_btn.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../controller/cart_controller.dart';

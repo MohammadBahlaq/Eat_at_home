@@ -7,13 +7,14 @@ import 'package:eat_at_home/widgets/login_signup_btn.dart';
 import 'package:eat_at_home/widgets/product_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../model/Cart.dart';
 
 class Category extends StatelessWidget {
   const Category({
-    Key? key,
+    super.key,
     required this.category,
-  }) : super(key: key);
+  });
 
   final String category;
 
@@ -48,7 +49,7 @@ class Category extends StatelessWidget {
                             child: Text(
                               "Medium Pizza",
                               textAlign: TextAlign.center,
-                              style: Theme.of(context).textTheme.headline4,
+                              style: Theme.of(context).textTheme.headlineMedium,
                             ),
                           );
                         } else if (i == 5 && category == "Pizza") {
@@ -57,7 +58,7 @@ class Category extends StatelessWidget {
                             child: Text(
                               "Small Pizza",
                               textAlign: TextAlign.center,
-                              style: Theme.of(context).textTheme.headline4,
+                              style: Theme.of(context).textTheme.headlineMedium,
                             ),
                           );
                         } else {
@@ -68,8 +69,7 @@ class Category extends StatelessWidget {
                         return InkWell(
                           child: ProductCard(
                             index: i,
-                            image:
-                                "${Data.imgPath}${productCrt.product[i].photo}",
+                            image: "${Data.imgPath}${productCrt.product[i].photo}",
                             category: category,
                             name: productCrt.product[i].name,
                             price: productCrt.product[i].price,
@@ -138,10 +138,7 @@ class Category extends StatelessWidget {
                                           "${Data.imgPath}${productCrt.product[i].photo}",
                                           height: mq.size.height * 0.39,
                                           width: mq.size.width,
-                                          fit: productCrt.product[i].category ==
-                                                  "Drinks"
-                                              ? BoxFit.contain
-                                              : BoxFit.fill,
+                                          fit: productCrt.product[i].category == "Drinks" ? BoxFit.contain : BoxFit.fill,
                                         ),
                                         Padding(
                                           padding: const EdgeInsets.all(8.0),
@@ -165,9 +162,7 @@ class Category extends StatelessWidget {
                                       ),
                                       child: Text(
                                         productCrt.product[i].name,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headline2,
+                                        style: const TextStyle(fontSize: 18),
                                       ),
                                     ),
                                     Padding(
@@ -175,26 +170,21 @@ class Category extends StatelessWidget {
                                         left: mq.size.width * 0.04,
                                         right: mq.size.width * 0.033,
                                         top: mq.size.height * 0.02,
-                                        bottom: mq.size.height * 0.02,
+                                        // bottom: mq.size.height * 0.02,
                                       ),
                                       child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
                                             "${productCrt.product[i].price} JD",
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headline2,
+                                            style: const TextStyle(fontSize: 18),
                                           ),
                                           Card(
                                             child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceAround,
+                                              mainAxisAlignment: MainAxisAlignment.spaceAround,
                                               children: [
                                                 IncDecButton(
-                                                  icon: const Icon(Icons.add,
-                                                      color: Colors.green),
+                                                  icon: const Icon(Icons.add, color: Colors.green),
                                                   color: Colors.transparent,
                                                   onClick: () {
                                                     cartCrt.increment();
@@ -204,18 +194,15 @@ class Category extends StatelessWidget {
                                                   selector: (context, p1) {
                                                     return p1.count;
                                                   },
-                                                  builder:
-                                                      (context, count, child) {
+                                                  builder: (context, count, child) {
                                                     return Text(
                                                       "$count",
-                                                      style: const TextStyle(
-                                                          fontSize: 18),
+                                                      style: const TextStyle(fontSize: 18),
                                                     );
                                                   },
                                                 ),
                                                 IncDecButton(
-                                                  icon: const Icon(Icons.remove,
-                                                      color: Colors.red),
+                                                  icon: const Icon(Icons.remove, color: Colors.red),
                                                   color: Colors.transparent,
                                                   onClick: () {
                                                     cartCrt.decrement();
@@ -229,8 +216,7 @@ class Category extends StatelessWidget {
                                     ),
                                     CustomButton(
                                       text: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
                                           const Text(
                                             "Add to cart",
@@ -241,8 +227,7 @@ class Category extends StatelessWidget {
                                             builder: (context, value, child) {
                                               return Text(
                                                 "${(productCrt.product[i].price * cartCrt.count).toStringAsFixed(2)} JD",
-                                                style: const TextStyle(
-                                                    fontSize: 18),
+                                                style: const TextStyle(fontSize: 18),
                                               );
                                             },
                                           ),
@@ -258,8 +243,7 @@ class Category extends StatelessWidget {
                                             name: productCrt.product[i].name,
                                             count: cartCrt.count,
                                             price: productCrt.product[i].price,
-                                            subTotalPrice: cartCrt.count *
-                                                productCrt.product[i].price,
+                                            subTotalPrice: cartCrt.count * productCrt.product[i].price,
                                             category: category,
                                             img: productCrt.product[i].photo,
                                           ),

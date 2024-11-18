@@ -5,13 +5,13 @@ import 'package:provider/provider.dart';
 
 class CountDialog extends StatelessWidget {
   const CountDialog({
-    Key? key,
+    super.key,
     this.incColor = Colors.black,
     this.decColor = Colors.black,
     required this.onIncrement,
     required this.onDecrement,
     required this.onConfirm,
-  }) : super(key: key);
+  });
 
   final Color incColor;
   final Color decColor;

@@ -1,16 +1,15 @@
-import 'package:eat_at_home/widgets/inc_dec_buttons.dart';
 import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({
-    Key? key,
+    super.key,
     required this.image,
     required this.category,
     required this.name,
     required this.price,
     required this.onClick,
     required this.index,
-  }) : super(key: key);
+  });
 
   final String image;
   final String category;
@@ -30,7 +29,7 @@ class ProductCard extends StatelessWidget {
             child: Text(
               "Large Pizza",
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.headline4,
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
           ),
         Container(
@@ -56,7 +55,7 @@ class ProductCard extends StatelessWidget {
                     child: Text(
                       name,
                       style: const TextStyle(fontSize: 18),
-                      softWrap: true,
+                      softWrap: false,
                     ),
                   ),
                   SizedBox(height: mq.size.height / 50),

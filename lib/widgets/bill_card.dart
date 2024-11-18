@@ -47,13 +47,13 @@ class BillCard extends StatelessWidget {
             children: [
               Text(
                 "ORDER #$id",
-                style: Theme.of(context).textTheme.headline1,
+                style: Theme.of(context).textTheme.displayLarge,
               ),
               InkWell(
                 onTap: onClick,
                 child: Text(
                   "View Detailes",
-                  style: Theme.of(context).textTheme.headline3,
+                  style: Theme.of(context).textTheme.displaySmall,
                 ),
               ),
             ],
@@ -64,11 +64,11 @@ class BillCard extends StatelessWidget {
               children: [
                 TextSpan(
                   text: "Date: ",
-                  style: Theme.of(context).textTheme.headline2,
+                  style: Theme.of(context).textTheme.displayMedium,
                 ),
                 TextSpan(
                   text: "$date - $time",
-                  style: Theme.of(context).textTheme.headline1,
+                  style: Theme.of(context).textTheme.displayLarge,
                 ),
               ],
             ),
@@ -79,11 +79,11 @@ class BillCard extends StatelessWidget {
               children: [
                 TextSpan(
                   text: "Total Price: ",
-                  style: Theme.of(context).textTheme.headline2,
+                  style: Theme.of(context).textTheme.displayMedium,
                 ),
                 TextSpan(
                   text: "${totalprice.toStringAsFixed(2)} JD",
-                  style: Theme.of(context).textTheme.headline1,
+                  style: Theme.of(context).textTheme.displayLarge,
                 ),
               ],
             ),
@@ -94,11 +94,11 @@ class BillCard extends StatelessWidget {
               children: [
                 TextSpan(
                   text: "Status: ",
-                  style: Theme.of(context).textTheme.headline2,
+                  style: Theme.of(context).textTheme.displayMedium,
                 ),
                 TextSpan(
                   text: status,
-                  style: Theme.of(context).textTheme.headline1,
+                  style: Theme.of(context).textTheme.displayLarge,
                 ),
               ],
             ),

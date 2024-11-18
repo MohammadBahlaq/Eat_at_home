@@ -47,7 +47,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: badges.Badge(
-                  padding: const EdgeInsets.all(3),
+                  badgeStyle: const badges.BadgeStyle(
+                    padding: EdgeInsets.all(3),
+                  ),
                   badgeContent: Selector<CartController, int>(
                     selector: (context, cartC) => cartC.countAll,
                     builder: ((context, length, child) {
@@ -57,7 +59,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                       );
                     }),
                   ),
-                  animationType: badges.BadgeAnimationType.slide,
+                  badgeAnimation: const badges.BadgeAnimation.slide(),
                   //position: BadgePosition.topEnd(end: 0, top: -4),
                   child: const Icon(
                     Icons.shopping_cart,

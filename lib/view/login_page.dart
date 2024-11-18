@@ -12,7 +12,7 @@ import 'package:string_validator/string_validator.dart';
 import '../controller/cart_controller.dart';
 
 class Login extends StatelessWidget {
-  const Login({Key? key}) : super(key: key);
+  const Login({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -51,9 +51,7 @@ class Login extends StatelessWidget {
                       icon: Icons.email,
                       keyboardType: TextInputType.emailAddress,
                       validator: (txt) {
-                        return txt!.isNotEmpty && isEmail(txt)
-                            ? null
-                            : "Please write a valid Email";
+                        return txt!.isNotEmpty && isEmail(txt) ? null : "Please write a valid Email";
                       },
                     ),
                     Selector<Data, bool>(
@@ -67,9 +65,7 @@ class Login extends StatelessWidget {
                           obscureText: isVisiable,
                           suffixIcon: IconButton(
                             icon: Icon(
-                              isVisiable
-                                  ? Icons.visibility
-                                  : Icons.visibility_off,
+                              isVisiable ? Icons.visibility : Icons.visibility_off,
                             ),
                             onPressed: () {
                               dataController.visibility();
@@ -113,8 +109,7 @@ class Login extends StatelessWidget {
                       productCrt.getProduct("Pizza");
                       nav.pushNamedAndRemoveUntil("home", (route) => false);
                       if (dataController.remember) {
-                        dataController.checkRemember(txtEmail.text,
-                            txtPassword.text, userController.userInfo!.id);
+                        dataController.checkRemember(txtEmail.text, txtPassword.text, userController.userInfo!.id);
                       }
                     } else {
                       nav.pop();
@@ -133,10 +128,7 @@ class Login extends StatelessWidget {
                   InkWell(
                     child: Text(
                       "Signup",
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).primaryColor),
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Theme.of(context).primaryColor),
                     ),
                     onTap: () {
                       Navigator.of(context).pushNamed("signup");

@@ -11,7 +11,7 @@ import '../controller/product_controller.dart';
 import '../widgets/category.dart';
 
 class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
+  const Home({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,16 +30,10 @@ class Home extends StatelessWidget {
               await productCrt.setCategory(value);
             },
             tabs: const [
-              Tab(
-                  icon: Icon(Icons.local_pizza, size: 29),
-                  child: Text("Pizza")),
-              Tab(
-                  icon: Icon(Icons.fastfood, size: 29),
-                  child: Text("Sandwich")),
+              Tab(icon: Icon(Icons.local_pizza, size: 29), child: Text("Pizza")),
+              Tab(icon: Icon(Icons.fastfood, size: 29), child: Text("Sandwich")),
               Tab(icon: Icon(Icons.food_bank, size: 29), child: Text("Salad")),
-              Tab(
-                  icon: Icon(Icons.local_drink, size: 29),
-                  child: Text("Drinks")),
+              Tab(icon: Icon(Icons.local_drink, size: 29), child: Text("Drinks")),
               Tab(icon: Icon(Icons.add, size: 29), child: Text("Other")),
             ],
             isScrollable: true,
@@ -69,14 +63,18 @@ class Home extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           badges.Badge(
-                            alignment: Alignment.center,
-                            shape: badges.BadgeShape.square,
-                            padding: EdgeInsets.symmetric(
-                              horizontal: mq.size.width * 0.013,
-                              vertical: mq.size.height * 0.003,
+                            position: badges.BadgePosition.center(),
+                            // alignment: Alignment.center,
+                            badgeStyle: badges.BadgeStyle(
+                              shape: badges.BadgeShape.square,
+                              padding: EdgeInsets.symmetric(
+                                horizontal: mq.size.width * 0.013,
+                                vertical: mq.size.height * 0.003,
+                              ),
+                              borderRadius: BorderRadius.circular(4),
+                              badgeColor: Colors.blue.shade200,
                             ),
-                            borderRadius: BorderRadius.circular(4),
-                            badgeColor: Colors.blue.shade200,
+
                             badgeContent: Selector<CartController, int>(
                               selector: (p0, p1) => p1.countAll,
                               builder: (context, countAll, child) {

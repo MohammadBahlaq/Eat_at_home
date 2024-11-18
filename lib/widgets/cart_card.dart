@@ -7,14 +7,14 @@ import 'package:provider/provider.dart';
 
 class CartCard extends StatelessWidget {
   const CartCard({
-    Key? key,
+    super.key,
     required this.image,
     required this.category,
     required this.name,
     required this.index,
     required this.onIncrement,
     required this.onDecrement,
-  }) : super(key: key);
+  });
 
   final String image;
   final String category;
