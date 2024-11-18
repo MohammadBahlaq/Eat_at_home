@@ -47,13 +47,17 @@ class BillCard extends StatelessWidget {
             children: [
               Text(
                 "ORDER #$id",
-                style: Theme.of(context).textTheme.displayLarge,
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
               InkWell(
                 onTap: onClick,
                 child: Text(
                   "View Detailes",
-                  style: Theme.of(context).textTheme.displaySmall,
+                  style: TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.bold,
+                    color: status == "Done" ? Colors.blue.shade300 : Colors.white,
+                  ),
                 ),
               ),
             ],
@@ -64,26 +68,27 @@ class BillCard extends StatelessWidget {
               children: [
                 TextSpan(
                   text: "Date: ",
-                  style: Theme.of(context).textTheme.displayMedium,
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
                 TextSpan(
                   text: "$date - $time",
-                  style: Theme.of(context).textTheme.displayLarge,
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
               ],
             ),
           ),
           RichText(
             text: TextSpan(
-              style: DefaultTextStyle.of(context).style,
+              style: DefaultTextStyle.of(context).style.copyWith(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
               children: [
                 TextSpan(
                   text: "Total Price: ",
-                  style: Theme.of(context).textTheme.displayMedium,
                 ),
                 TextSpan(
                   text: "${totalprice.toStringAsFixed(2)} JD",
-                  style: Theme.of(context).textTheme.displayLarge,
                 ),
               ],
             ),
@@ -94,11 +99,11 @@ class BillCard extends StatelessWidget {
               children: [
                 TextSpan(
                   text: "Status: ",
-                  style: Theme.of(context).textTheme.displayMedium,
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
                 TextSpan(
                   text: status,
-                  style: Theme.of(context).textTheme.displayLarge,
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
               ],
             ),

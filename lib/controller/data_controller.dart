@@ -81,9 +81,9 @@ class Data with ChangeNotifier {
   }
 
   void checkRemember(String email, String password, int id) async {
-    prefs!.setString("email", email);
-    prefs!.setString("password", password);
-    prefs!.setInt("id", id);
+    prefs.setString("email", email);
+    prefs.setString("password", password);
+    prefs.setInt("id", id);
   }
 }
 

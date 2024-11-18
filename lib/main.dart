@@ -14,7 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-SharedPreferences? prefs;
+late SharedPreferences prefs;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   prefs = await SharedPreferences.getInstance();
@@ -32,9 +32,9 @@ void main() async {
         final ProductController productCrt = context.read<ProductController>();
         productCrt.getProduct("Pizza");
 
-        if (prefs!.getString("email") != null) {
-          userCrt.login(prefs!.getString("email")!, prefs!.getString("password")!);
-          cartCrt.getCart(prefs!.getInt("id")!);
+        if (prefs.getString("email") != null) {
+          userCrt.login(prefs.getString("email")!, prefs.getString("password")!);
+          cartCrt.getCart(prefs.getInt("id")!);
         }
         return const MyApp();
       },

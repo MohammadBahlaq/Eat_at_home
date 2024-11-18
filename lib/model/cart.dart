@@ -2,7 +2,7 @@
 
 class CartP {
   int transId;
-  int userId;
+  int? userId;
   int mealId;
   String name;
   double price;
@@ -13,7 +13,7 @@ class CartP {
 
   CartP({
     this.transId = 0,
-    required this.userId,
+    this.userId,
     required this.mealId,
     required this.name,
     required this.count,

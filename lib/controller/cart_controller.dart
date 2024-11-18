@@ -1,5 +1,6 @@
 import 'package:eat_at_home/controller/data_controller.dart';
 import 'package:eat_at_home/controller/sqflite_controller.dart';
+import 'package:eat_at_home/main.dart';
 import 'package:eat_at_home/model/Cart.dart';
 import 'package:eat_at_home/model/bill.dart';
 import 'package:flutter/material.dart';
@@ -79,8 +80,7 @@ class CartController with ChangeNotifier {
     // }
 
     //SqfLite
-    int delete = await mydb
-        .deleteData("delete from cart where tr_id = ${product.transId}");
+    int delete = await mydb.deleteData("delete from cart where tr_id = ${product.transId}");
     if (delete == 1) {
       totalPrice -= product.subTotalPrice;
       countAll -= product.count;
@@ -89,7 +89,7 @@ class CartController with ChangeNotifier {
     }
   }
 
-  Future<void> getCart(int userid) async {
+  Future<void> getCart(int? userid) async {
     // String url = "${Data.apiPath}select_cart.php?userid=$userid";
 
     // var response = await http.get(Uri.parse(url));
@@ -206,11 +206,11 @@ class CartController with ChangeNotifier {
       response = await http.post(
         Uri.parse(url),
         body: {
-          "userid": "${product.userId}",
+          "userid": "${product.userId ?? prefs.getInt('id')}",
           "mealid": "${product.mealId}",
           "count": "${product.count}",
           "subprice": "${product.subTotalPrice}",
-          "billid": "$billID"
+          "billid": "$billID",
         },
       );
     }

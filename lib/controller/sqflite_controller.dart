@@ -1,8 +1,9 @@
 // ignore_for_file: depend_on_referenced_packages, avoid_print
 
 import 'dart:async';
-import 'package:sqflite/sqflite.dart';
+
 import 'package:path/path.dart' show join;
+import 'package:sqflite/sqflite.dart';
 
 class SqfLite {
   static Database? _db;
@@ -27,10 +28,10 @@ class SqfLite {
   }
 
   FutureOr<void> _onCreate(Database mydb, int version) async {
-    mydb.execute(''' 
+    mydb.execute('''
     CREATE TABLE cart (
     "tr_id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "user_id" INTEGER NOT NULL,
+    "user_id" INTEGER,
     "meal_id" INTEGER NOT NULL,
     "count" INTEGER NOT NULL,
     "price" REAL NOT NULL,

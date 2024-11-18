@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=3.2.3 <4.0.0"
+  sdk: ">=3.5.3 <4.0.0"
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -35,12 +35,12 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   provider: ^6.0.3
-  string_validator: ^0.3.0
-  http: ^0.13.5
-  flutter_svg: ^1.1.4
+  string_validator: ^1.1.0
+  http: ^1.2.2
+  flutter_svg: ^2.0.14
   shared_preferences: ^2.0.15
   badges: 
-  email_auth: ^1.0.0
+  email_auth: ^2.0.0
   sqflite: ^2.1.0
   short_navigation: ^1.1.0
 
@@ -53,9 +53,9 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^3.0.0
+  flutter_lints: ^5.0.0
   flutter_native_splash: ^2.2.7
-  flutter_launcher_icons: ^0.10.0
+  flutter_launcher_icons: ^0.14.1
 
 flutter_native_splash:
   image: "images/logo2.png"

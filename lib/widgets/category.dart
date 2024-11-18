@@ -238,7 +238,7 @@ class Category extends StatelessWidget {
 
                                         await cartCrt.isExisting(
                                           CartP(
-                                            userId: userCrt.userInfo!.id,
+                                            userId: userCrt.userInfo?.id,
                                             mealId: productCrt.product[i].id,
                                             name: productCrt.product[i].name,
                                             count: cartCrt.count,
